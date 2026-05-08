@@ -1,0 +1,42 @@
+{
+  "baseline": {
+    "mode": "baseline",
+    "avg_wait_time": 82.0,
+    "max_queue_length": 1549.5,
+    "attractions_completed_per_visitor": 2.01,
+    "visitor_satisfaction_score": 58.3,
+    "paid_slots_sold": 0,
+    "revenue_generated": 0.0,
+    "queue_variance": 102106.98,
+    "attraction_loads": {
+      "Мельница": 395.07,
+      "Молот судьбы": 374.13,
+      "Иммерсивный полёт": 73.0,
+      "Лагуна": 68.62,
+      "Лава": 74.74,
+      "Лианы": 30.41,
+      "Бешеный танец": 413.2,
+      "На крыльях ветра": 73.1
+    }
+  },
+  "optimized": {
+    "mode": "optimized_base",
+    "avg_wait_time": 74.18,
+    "max_queue_length": 1066.0,
+    "attractions_completed_per_visitor": 2.02,
+    "visitor_satisfaction_score": 61.1,
+    "paid_slots_sold": 469,
+    "revenue_generated": 234500.0,
+    "queue_variance": 10484.87,
+    "attraction_loads": {
+      "Мельница": 283.47,
+      "Молот судьбы": 284.27,
+      "Иммерсивный полёт": 120.54,
+      "Лагуна": 128.36,
+      "Лава": 117.51,
+      "Лианы": 95.74,
+      "Бешеный танец": 282.07,
+      "На крыльях ветра": 117.38
+    }
+  }
+}

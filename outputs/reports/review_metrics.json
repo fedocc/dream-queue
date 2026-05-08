@@ -1,0 +1,83 @@
+{
+  "source_file": "data/processed/reviews_labeled.csv",
+  "total_reviews": 328,
+  "queue_related_count": 96,
+  "queue_related_share": 0.2927,
+  "negative_count_among_queue_related": 30,
+  "negative_share_among_queue_related": 0.3125,
+  "price_related_count": 71,
+  "price_related_share": 0.2165,
+  "crowd_related_count": 24,
+  "crowd_related_share": 0.0732,
+  "fastpass_related_count": 18,
+  "fastpass_related_share": 0.0549,
+  "attractions_mentioned_count": {
+    "Молот судьбы": 12,
+    "Мельница": 4,
+    "Бешеный танец": 1,
+    "Иммерсивный полёт": 1,
+    "Лава": 1
+  },
+  "frequent_queue_terms": [
+    {
+      "term": "очереди",
+      "count": 89
+    },
+    {
+      "term": "очень",
+      "count": 41
+    },
+    {
+      "term": "были",
+      "count": 36
+    },
+    {
+      "term": "аттракционы",
+      "count": 29
+    },
+    {
+      "term": "день",
+      "count": 27
+    },
+    {
+      "term": "много",
+      "count": 25
+    },
+    {
+      "term": "аттракционов",
+      "count": 23
+    },
+    {
+      "term": "парк",
+      "count": 21
+    },
+    {
+      "term": "было",
+      "count": 21
+    },
+    {
+      "term": "есть",
+      "count": 18
+    },
+    {
+      "term": "очередь",
+      "count": 17
+    },
+    {
+      "term": "место",
+      "count": 17
+    },
+    {
+      "term": "можно",
+      "count": 17
+    },
+    {
+      "term": "раз",
+      "count": 17
+    },
+    {
+      "term": "лучше",
+      "count": 15
+    }
+  ]
+}

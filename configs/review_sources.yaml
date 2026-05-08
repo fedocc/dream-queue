@@ -1,0 +1,22 @@
+mode: local_only
+
+policy:
+  use_fake_reviews: false
+  collect_from_mapping_services: false
+  bypass_protection: false
+  require_source_url: true
+
+local_inputs:
+  raw_reviews_dir: data/raw/reviews
+  clean_reviews_file: data/processed/reviews_clean.csv
+  labeled_reviews_file: data/processed/reviews_labeled.csv
+
+allowed_future_sources:
+  - already_saved_local_files
+  - official_pages
+  - manual_seed_table
+  - open_datasets_with_clear_license
+
+notes:
+  - "Do not run new collection from mapping services for this MVP stage."
+  - "Benchmark datasets must stay separate from Ostrov Mechty review-evidence."

@@ -1,0 +1,4 @@
+scenario,slot_price_rub,paid_fast_slot_conversion,virtual_queue_adoption,max_fast_slot_capacity_share,peak_day_fast_slots_sold,normal_day_fast_slots_sold,daily_fast_slot_revenue_peak,daily_fast_slot_revenue_normal,annual_fast_slot_revenue,startup_annual_revenue,park_fast_slot_revenue_share,park_retail_uplift,park_annual_uplift,peak_avg_wait_baseline,peak_avg_wait_optimized,normal_avg_wait_baseline,normal_avg_wait_optimized,weighted_avg_wait_time_reduction,annual_additional_attractions_visited
+conservative,300,0.02,0.2,0.08,189,0,56700.0,0.0,5103000.0,765450.0,4337550.0,25920000.0,30257550.0,82.0,73.54,0.02,0.02,4.7,9000.0
+base,500,0.05,0.35,0.12,469,0,234500.0,0.0,21105000.0,3165750.0,17939250.0,45360000.0,63299250.0,82.0,74.18,0.02,0.02,4.34,9000.0
+aggressive,700,0.1,0.5,0.15,840,0,588000.0,0.0,52920000.0,7938000.0,44982000.0,64800000.0,109782000.0,82.0,74.54,0.02,0.02,4.14,9000.0

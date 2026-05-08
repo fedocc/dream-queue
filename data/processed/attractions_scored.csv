@@ -1,0 +1,9 @@
+attraction_name,source_url,zone,type,height_rule,express_available,standard_ticket_from_rub,express_ticket_from_rub,estimated_popularity,estimated_capacity_per_hour,thrill_level,queue_risk_score,fastpass_potential
+Молот судьбы,https://dreamisland.ru/attractions/molot-sudby,Черепашки-ниндзя,Экстремальные,от 130 см до 185 см,True,2700,7000,0.9,500,5,0.78,0.975
+Мельница,https://dreamisland.ru/attractions/melnitsa,Под куполом,Экстремальные,от 140 см,True,2700,7000,0.9,500,5,0.68,0.85
+Иммерсивный полёт,https://dreamisland.ru/attractions/immersivnyy-polyet,Замок Снежной королевы,Семейные,"110-130 см в сопровождении, от 130 см без сопровождения",True,2700,7000,0.9,650,3,0.68,0.714
+Лагуна,https://dreamisland.ru/attractions/laguna,Маугли в стране динозавров,Семейные,"100-120 см в сопровождении, от 120 см без сопровождения",True,2800,7400,0.75,650,3,0.62,0.651
+Лава,https://dreamisland.ru/attractions/lava,Маугли в стране динозавров,Семейные,"120-130 см в сопровождении, от 130 см без сопровождения",True,2700,7000,0.75,650,3,0.62,0.651
+Бешеный танец,https://dreamisland.ru/attractions/beshenyy-tanets,Под куполом,Экстремальные,от 130 см до 190 см,True,2700,7000,0.75,500,5,0.62,0.775
+На крыльях ветра,https://dreamisland.ru/attractions/na-krylyakh-vetra,Маугли в стране динозавров,Семейные,от 120 см до 195 см,True,2800,7400,0.75,650,3,0.62,0.651
+Лианы,https://dreamisland.ru/attractions/liany,Маугли в стране динозавров,Детские,"105-120 см в сопровождении, от 120 см без сопровождения",True,2800,7400,0.68,650,2,0.592,0.562

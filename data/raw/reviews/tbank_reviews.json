@@ -1,0 +1,24 @@
+[
+  {
+    "source": "tbank_reviews",
+    "source_url": "https://www.tbank.ru/reviews/company/ostrov-mechty/105125/",
+    "date": "2026-04-14",
+    "rating": "",
+    "captured_at": "2026-05-08",
+    "platform_rating": "4.7",
+    "platform_reviews_count": "1744",
+    "evidence_type": "public_review_excerpt",
+    "text": "Выходной с семьей прошел отлично, советует посетить это место."
+  },
+  {
+    "source": "tbank_reviews",
+    "source_url": "https://www.tbank.ru/reviews/company/ostrov-mechty/105125/",
+    "date": "2026-04-13",
+    "rating": "",
+    "captured_at": "2026-05-08",
+    "platform_rating": "4.7",
+    "platform_reviews_count": "1744",
+    "evidence_type": "public_review_excerpt",
+    "text": "Входной билет кажется неоправданно дорогим, ребенок проходит не на все аттракционы, за многое нужно доплачивать."
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "mode": "baseline",
+  "avg_wait_time": 58.23,
+  "max_queue_length": 1211.5,
+  "attractions_completed_per_visitor": 3.93,
+  "visitor_satisfaction_score": 41.7,
+  "paid_slots_sold": 0,
+  "revenue_generated": 0.0,
+  "queue_variance": 78007.73,
+  "attraction_loads": {
+    "Мельница": 319.27,
+    "Молот судьбы": 293.53,
+    "Иммерсивный полёт": 41.64,
+    "Лагуна": 26.79,
+    "Лава": 43.38,
+    "Лианы": 10.1,
+    "Бешеный танец": 323.07,
+    "На крыльях ветра": 43.0
+  }
+}

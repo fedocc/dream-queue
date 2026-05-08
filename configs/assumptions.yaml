@@ -1,0 +1,51 @@
+park:
+  peak_day_visitors: 10000
+  normal_day_visitors: 4000
+  peak_days_per_year: 90
+  normal_days_per_year: 180
+
+product:
+  virtual_queue_adoption: 0.35
+  paid_fast_slot_conversion: 0.05
+  average_fast_slot_price_rub: 500
+  average_slots_per_buyer: 1.4
+  max_fast_slot_capacity_share: 0.12
+  routing_strength: 0.45
+  park_revenue_share: 0.85
+  startup_revenue_share: 0.15
+
+effect:
+  extra_food_retail_spend_per_guest_rub: 80
+
+simulation:
+  visitors: 10000
+  park_hours: 10
+  time_step_minutes: 5
+  seed: 42
+  target_attractions_per_guest: 4.8
+  operational_capacity_factor: 0.45
+  selected_attractions_demand_share: 0.55
+  peak_demand_multiplier: 1.45
+  low_demand_multiplier: 0.65
+  high_wait_threshold_minutes: 45
+  low_wait_threshold_minutes: 20
+
+scenarios:
+  conservative:
+    paid_fast_slot_conversion: 0.02
+    average_fast_slot_price_rub: 300
+    virtual_queue_adoption: 0.20
+    max_fast_slot_capacity_share: 0.08
+    routing_strength: 0.25
+  base:
+    paid_fast_slot_conversion: 0.05
+    average_fast_slot_price_rub: 500
+    virtual_queue_adoption: 0.35
+    max_fast_slot_capacity_share: 0.12
+    routing_strength: 0.45
+  aggressive:
+    paid_fast_slot_conversion: 0.10
+    average_fast_slot_price_rub: 700
+    virtual_queue_adoption: 0.50
+    max_fast_slot_capacity_share: 0.15
+    routing_strength: 0.60

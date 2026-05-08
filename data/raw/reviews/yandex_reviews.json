@@ -1,0 +1,29 @@
+[
+  {
+    "source": "yandex_reviews",
+    "source_url": "https://reviews.yandex.ru/product/park-razvlechenii-ostrov-mechty--64749272",
+    "date": "2025-08-05",
+    "rating": "",
+    "captured_at": "2026-05-08",
+    "evidence_type": "public_review_excerpt",
+    "text": "Ужасное место, очереди огромные, персонал медленный, в очереди прошло около 40 минут."
+  },
+  {
+    "source": "yandex_reviews",
+    "source_url": "https://reviews.yandex.ru/product/park-razvlechenii-ostrov-mechty--64749272",
+    "date": "2025-07-14",
+    "rating": "",
+    "captured_at": "2026-05-08",
+    "evidence_type": "public_review_excerpt",
+    "text": "Очень большие очереди на карусели. За три часа получилось только три аттракциона."
+  },
+  {
+    "source": "yandex_reviews",
+    "source_url": "https://reviews.yandex.ru/product/park-razvlechenii-ostrov-mechty--64749272",
+    "date": "2024-09-22",
+    "rating": "",
+    "captured_at": "2026-05-08",
+    "evidence_type": "public_review_excerpt",
+    "text": "Ребенку очень понравилось."
+  }
+]
