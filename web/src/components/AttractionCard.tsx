@@ -18,9 +18,9 @@ export default function AttractionCard({ name, zone, wait, slot, fastPrice, load
         <p>{zone}</p>
       </div>
       <div className="waitBlock">
-        <strong>{wait} мин</strong>
+        <strong>{wait} мин scenario</strong>
         <span>Свободный слот: {slot}</span>
-        <span>Fast slot: {fastPrice} ₽</span>
+        <span>Fast slot scenario: {fastPrice} ₽</span>
       </div>
       <div className="actions">
         <button><CalendarPlus size={17} />Забронировать</button>
@@ -29,4 +29,3 @@ export default function AttractionCard({ name, zone, wait, slot, fastPrice, load
     </article>
   );
 }
-

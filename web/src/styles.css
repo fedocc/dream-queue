@@ -390,6 +390,17 @@ main {
   text-transform: uppercase;
 }
 
+.sourceCard em {
+  justify-self: start;
+  padding: 5px 8px;
+  border: 1px solid rgba(43, 128, 88, 0.28);
+  border-radius: 999px;
+  color: var(--success);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 800;
+}
+
 .sourceCard strong {
   font-size: clamp(34px, 4.6vw, 58px);
   line-height: 1;
@@ -419,6 +430,48 @@ main {
 .methodNote p {
   margin: 0;
   line-height: 1.5;
+}
+
+.provenanceLegend {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.provenanceLegend > div {
+  min-width: 0;
+  padding: 16px;
+  background: #ebe4d7;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.provenanceLegend p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.provenanceChip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 24px;
+  padding: 0 8px;
+  border: 1px solid rgba(43, 128, 88, 0.28);
+  border-radius: 999px;
+  color: var(--success);
+  background: rgba(220, 236, 223, 0.56);
+  font-size: 12px;
+  font-weight: 820;
+  text-transform: uppercase;
+}
+
+.provenanceChip.inline {
+  margin-right: 8px;
+  vertical-align: 1px;
 }
 
 .quoteBand {
@@ -544,6 +597,46 @@ main {
   color: #332f29;
   font-weight: 650;
   line-height: 1.35;
+}
+
+.evidenceMapGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.evidenceMapCard {
+  min-width: 0;
+  padding: 22px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.evidenceMapCard h3 {
+  margin: 0 0 18px;
+  font-size: 22px;
+  line-height: 1.1;
+}
+
+.evidenceMapCard dl {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+}
+
+.evidenceMapCard dt {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.evidenceMapCard dd {
+  margin: 5px 0 0;
+  color: #4f493f;
+  line-height: 1.45;
 }
 
 .simulationGrid {
@@ -1013,6 +1106,8 @@ main {
   .heroStrip,
   .evidenceGrid,
   .sourceGrid,
+  .provenanceLegend,
+  .evidenceMapGrid,
   .simulationGrid,
   .scenarioGrid,
   .productGrid {

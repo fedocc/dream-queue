@@ -7,15 +7,14 @@ const scenarios = [
 export default function RevenueChart() {
   return (
     <div className="revenueChart">
-      <h2>Revenue scenarios</h2>
+      <h2>Revenue scenarios (model output)</h2>
       {scenarios.map(([name, value]) => (
         <div className="revenueRow" key={name}>
           <span>{name}</span>
           <div><i style={{ width: `${Number(value) * 22}%` }} /></div>
-          <b>{value} млн ₽</b>
+          <b>{value} млн ₽ scenario</b>
         </div>
       ))}
     </div>
   );
 }
-
