@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 
 @dataclass
@@ -27,12 +28,13 @@ class Attraction:
     def add_priority_demand(self, visitors: float) -> None:
         self.priority_queue += visitors
 
-    def process_step(self, priority_capacity_share: float = 0.0) -> None:
-        priority_capacity = self.capacity_per_step * priority_capacity_share
+    def process_step(self, priority_capacity_share: float = 0.0, capacity_multiplier: float = 1.0) -> None:
+        step_capacity = self.capacity_per_step * capacity_multiplier
+        priority_capacity = step_capacity * priority_capacity_share
         priority_served = min(self.priority_queue, priority_capacity)
         self.priority_queue -= priority_served
 
-        regular_capacity = self.capacity_per_step - priority_served
+        regular_capacity = step_capacity - priority_served
         served = min(self.queue, regular_capacity)
         self.queue -= served
         self.completed += int(served)
@@ -54,3 +56,7 @@ class SimulationResult:
     revenue_generated: float = 0.0
     queue_variance: float = 0.0
     attraction_loads: dict[str, float] = field(default_factory=dict)
+    output_label: str = "model output"
+    assumptions_used: dict[str, float] = field(default_factory=dict)
+    assumption_labels: dict[str, str] = field(default_factory=dict)
+    risk_outputs: dict[str, Any] = field(default_factory=dict)

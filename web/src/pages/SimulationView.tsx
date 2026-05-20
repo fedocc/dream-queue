@@ -3,8 +3,8 @@ import { Activity, Coins, Users } from "lucide-react";
 import RevenueChart from "../components/RevenueChart";
 
 const data = {
-  baseline: { wait: 38, attractions: 4.8, satisfaction: 67, revenue: 0 },
-  optimized: { wait: 25, attractions: 6.1, satisfaction: 83, revenue: 1400000 },
+  baseline: { wait: 82.0, attractions: 2.01, satisfaction: 58.3, revenue: 0 },
+  optimized: { wait: 72.3, attractions: 2.0, satisfaction: 61.7, revenue: 145000 },
 };
 
 export default function SimulationView() {
@@ -27,16 +27,15 @@ export default function SimulationView() {
       </div>
       <div className="simulationCharts">
         <div className="beforeAfter">
-          <div style={{ height: `${data.baseline.wait * 5}px` }}><span>38 мин</span></div>
-          <div style={{ height: `${data.optimized.wait * 5}px` }}><span>25 мин</span></div>
+          <div style={{ height: `${data.baseline.wait * 2}px` }}><span>82 мин</span></div>
+          <div style={{ height: `${data.optimized.wait * 2}px` }}><span>72.3 мин</span></div>
         </div>
         <RevenueChart />
         <div className="upliftBox">
           <strong>Итоговый uplift</strong>
-          <p>-34% к среднему ожиданию, +27% к количеству посещенных аттракционов, 1.4 млн ₽ fast-slot revenue в базовом peak-day сценарии.</p>
+          <p>Сценарный output: -9.7 мин к среднему ожиданию, 145 тыс. ₽ fast-slot revenue в базовом peak-day сценарии. Аттракционов на гостя не растет, потому что VQ не увеличивает физическую capacity.</p>
         </div>
       </div>
     </div>
   );
 }
-

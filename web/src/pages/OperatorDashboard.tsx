@@ -18,8 +18,8 @@ export default function OperatorDashboard() {
           <h1>Прогноз загрузки и управление слотами</h1>
         </div>
         <div className="metricGrid">
-          <div className="metric"><Gauge size={19} /><span>Avg wait</span><strong>24 мин</strong></div>
-          <div className="metric"><TrendingUp size={19} /><span>Fast slots</span><strong>1.4 млн ₽/день</strong></div>
+          <div className="metric"><Gauge size={19} /><span>Avg wait</span><strong>72.3 мин</strong></div>
+          <div className="metric"><TrendingUp size={19} /><span>Fast slots</span><strong>145 тыс. ₽/день</strong></div>
           <div className="metric"><AlertTriangle size={19} /><span>Risk zones</span><strong>2</strong></div>
         </div>
         <div className="loadPanel">
@@ -35,11 +35,10 @@ export default function OperatorDashboard() {
       </section>
       <aside className="recommendationPanel">
         <h2>Рекомендация системы</h2>
-        <p>Мельница перегружена: прогноз очереди 55 мин через 30 минут.</p>
-        <p>Ограничить бесплатные слоты, поднять fast slot до 590 ₽, перенаправить гостей на Кобру и Ночное Дерби.</p>
+        <p>Мельница перегружена: сценарный прогноз остается чувствительным к late arrivals, no-shows и downtime.</p>
+        <p>Ограничить paid capacity, сохранить standby threshold и перенаправить гостей только там, где route compliance подтверждается в пилоте.</p>
         <RevenueChart />
       </aside>
     </div>
   );
 }
-
