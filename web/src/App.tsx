@@ -83,28 +83,28 @@ const queueLoads = [
 const pilotSteps = [
   "4-8 недель",
   "5-8 выбранных аттракционов",
-  "wait-time и throughput данные",
+  "данные по ожиданию и пропускной способности",
   "дашборд + симуляция + финмодель",
 ];
 
 const dataSources = [
   {
-    title: "Review evidence",
+    title: "Отзывы",
     value: "328",
     text: "локально сохраненных строк отзывов по «Острову Мечты»",
   },
   {
-    title: "Official facts",
+    title: "Публичные факты",
     value: "8",
     text: "официальных страниц аттракционов и публичных описаний",
   },
   {
-    title: "External benchmark",
+    title: "Внешний ориентир",
     value: "42 656",
     text: "отзывов Disneyland Reviews для проверки методики",
   },
   {
-    title: "Model outputs",
+    title: "Расчеты модели",
     value: "3",
     text: "сценария экономики: conservative, base, aggressive",
   },
@@ -143,7 +143,7 @@ function App() {
             </div>
             <h1>Очереди стоят парку денег.</h1>
             <p>
-              Research MVP для «Острова Мечты»: review evidence, benchmark по индустрии,
+              Исследовательский MVP для «Острова Мечты»: отзывы, внешний ориентир по индустрии,
               симуляция очередей и сценарная экономика быстрых слотов.
             </p>
             <div className="heroActions">
@@ -151,7 +151,7 @@ function App() {
                 Смотреть модель
                 <ArrowRight size={17} />
               </a>
-              <a className="secondaryButton" href="#evidence">Открыть evidence</a>
+              <a className="secondaryButton" href="#evidence">Открыть данные</a>
             </div>
           </div>
 
@@ -189,7 +189,7 @@ function App() {
           <div className="sectionMeta">
             <span className="sectionLabel">01 / Данные</span>
             <p>
-              Мы разделили исходные отзывы, публичные факты, допущения и расчетные outputs,
+              Мы разделили исходные отзывы, публичные факты, допущения и расчетные результаты,
               чтобы каждая метрика имела понятное происхождение.
             </p>
           </div>
@@ -207,8 +207,8 @@ function App() {
         <div className="methodNote">
           <SearchCheck size={18} />
           <p>
-            Локальные отзывы показывают early evidence по «Острову Мечты». Disneyland benchmark
-            не заменяет эти данные, а проверяет ту же методику на большом открытом датасете парков.
+            Локальные отзывы показывают ранние сигналы по «Острову Мечты». Датасет Disneyland
+            не заменяет эти данные, а проверяет ту же методику на большой открытой выборке парков.
           </p>
         </div>
         <div className="evidenceGrid">
@@ -223,8 +223,9 @@ function App() {
             <strong>Продуктовый вывод</strong>
           </div>
           <p>
-            Начинать пилот нужно с выбранных bottleneck-аттракционов и peak windows, где ожидание
-            бьет по perceived value билета и создает пространство для free virtual queue + limited paid slots.
+            Начинать пилот нужно с выбранных проблемных аттракционов и пиковых временных окон, где ожидание
+            снижает ощущаемую ценность билета и создает пространство для бесплатной виртуальной очереди
+            и ограниченных платных быстрых слотов.
           </p>
         </div>
       </section>
@@ -232,7 +233,7 @@ function App() {
       <section className="section benchmarkDataSection">
         <div className="sectionIntro compactIntro">
           <div className="sectionMeta">
-            <span className="sectionLabel">02 / Benchmark</span>
+            <span className="sectionLabel">02 / Внешний ориентир</span>
             <p>
               Внешний датасет нужен не как доказательство по Москве, а как проверка, что pipeline
               масштабируется на большую выборку из той же индустрии.
@@ -243,14 +244,14 @@ function App() {
         <div className="benchmarkCompare">
           <BenchmarkColumn
             title="Остров Мечты"
-            note="локальный seed evidence"
+            note="локальная выборка отзывов"
             total={reviewMetrics.total.toString()}
             queue={reviewMetrics.queueShare}
             negative={reviewMetrics.queueNegativeShare}
           />
           <BenchmarkColumn
             title="Disneyland"
-            note="external benchmark"
+            note="внешний открытый датасет"
             total={disneylandBenchmark.total}
             queue={disneylandBenchmark.queueShare}
             negative={disneylandBenchmark.queueNegativeShare}
@@ -264,14 +265,14 @@ function App() {
           <h2>Genting SkyWorlds + Alibaba Cloud уже доказали категорию.</h2>
           <p>
             Их публичный кейс описывает virtual queue, планирование маршрута, прогноз crowding
-            и стимулы для перераспределения гостей между аттракционами, едой и retail. Для «Острова Мечты»
-            мы предлагаем не enterprise rebuild, а легкий pilot layer поверх текущей инфраструктуры.
+            и стимулы для перераспределения гостей между аттракционами, едой и магазинами. Для «Острова Мечты»
+            мы предлагаем не перестройку всей ИТ-системы, а легкий пилотный слой поверх текущей инфраструктуры.
           </p>
         </div>
         <div className="benchmarkChecks">
           <CheckItem icon={<Route size={18} />} text="Маршруты и слоты вместо хаотичного ожидания" />
-          <CheckItem icon={<Gauge size={18} />} text="Оператор видит bottlenecks до пика" />
-          <CheckItem icon={<CircleDollarSign size={18} />} text="Priority inventory становится управляемой выручкой" />
+          <CheckItem icon={<Gauge size={18} />} text="Оператор видит узкие места до пика" />
+          <CheckItem icon={<CircleDollarSign size={18} />} text="Инвентарь быстрых слотов становится управляемой выручкой" />
         </div>
       </section>
 
@@ -280,8 +281,8 @@ function App() {
           <div className="sectionMeta">
             <span className="sectionLabel">04 / Симуляция</span>
             <p>
-              Сценарная модель на assumptions, а не измеренные данные парка. Показывает механику:
-              спрос перераспределяется, а быстрые слоты ограничены capacity.
+              Сценарная модель на допущениях, а не измеренные данные парка. Показывает механику:
+              спрос перераспределяется, а быстрые слоты ограничены пропускной способностью.
             </p>
           </div>
           <h2>Модель пикового дня: меньше худшая очередь, ниже перекос нагрузки.</h2>
@@ -320,7 +321,7 @@ function App() {
           <div className="sectionMeta">
             <span className="sectionLabel">05 / Экономика</span>
             <p>
-              Финмодель запускает normal и peak day симуляции. Если очереди нет, спрос на платное
+              Финмодель сравнивает обычный и пиковый день. Если очереди нет, спрос на платное
               ускорение честно падает до нуля.
             </p>
           </div>
@@ -335,7 +336,7 @@ function App() {
                 <div><dt>Цена слота</dt><dd>{scenario.price}</dd></div>
                 <div><dt>Конверсия</dt><dd>{scenario.conversion}</dd></div>
                 <div><dt>Слоты в пик</dt><dd>{scenario.slots}</dd></div>
-                <div><dt>Uplift парка</dt><dd>{scenario.parkUplift}</dd></div>
+                <div><dt>Эффект для парка</dt><dd>{scenario.parkUplift}</dd></div>
               </dl>
             </article>
           ))}
@@ -355,10 +356,10 @@ function App() {
           <h2>Что именно получает парк.</h2>
         </div>
         <div className="productGrid">
-          <ProductTile icon={<Database size={20} />} title="Карта bottlenecks" text="Аттракционы и временные окна, где ожидание сильнее всего портит perceived value." />
+          <ProductTile icon={<Database size={20} />} title="Карта узких мест" text="Аттракционы и временные окна, где ожидание сильнее всего снижает ощущаемую ценность визита." />
           <ProductTile icon={<Route size={20} />} title="Маршрутизация гостей" text="Рекомендации маршрута и бесплатные виртуальные слоты, чтобы гость не стоял физически весь визит." />
           <ProductTile icon={<Gauge size={20} />} title="Дашборд оператора" text="Прогноз загрузки, перекос очередей, инвентарь слотов и действия для операционной команды." />
-          <ProductTile icon={<TrendingUp size={20} />} title="Модель выручки" text="Ограниченные платные быстрые слоты с capacity guardrails и прозрачным revenue share." />
+          <ProductTile icon={<TrendingUp size={20} />} title="Модель выручки" text="Ограниченные платные быстрые слоты с защитой пропускной способности и прозрачным разделением выручки." />
         </div>
       </section>
 
@@ -367,11 +368,12 @@ function App() {
           <span className="sectionLabel">07 / Пилот</span>
           <h2>Легкий пилот без замены билетной системы.</h2>
           <p>
-            Мы приходим не с готовой истиной про парк, а с проверяемой гипотезой, benchmark аналогом
-            и работающим пайплайном. Для точности нужны реальные wait-time, attendance и throughput данные.
+            Мы приходим не с готовой истиной про парк, а с проверяемой гипотезой, внешним ориентиром
+            и работающим пайплайном. Для точности нужны реальные данные по ожиданию, посещаемости
+            и пропускной способности.
           </p>
           <a className="primaryButton" href="mailto:hello@dreamqueue.ai?subject=Dream%20Queue%20AI%20pilot">
-            Запросить pilot brief
+            Запросить описание пилота
             <ArrowRight size={17} />
           </a>
         </div>
@@ -387,7 +389,7 @@ function App() {
 
       <footer className="footer">
         <span>Dream Queue AI</span>
-        <span>Research MVP. All outputs are scenario-based until verified with park operations data.</span>
+        <span>Исследовательский MVP. Все расчетные эффекты остаются сценариями до проверки на операционных данных парка.</span>
       </footer>
     </main>
   );
@@ -438,7 +440,7 @@ function BenchmarkColumn({ title, note, total, queue, negative }: { title: strin
       <dl>
         <div><dt>Отзывы</dt><dd>{total}</dd></div>
         <div><dt>Про очереди</dt><dd>{queue}</dd></div>
-        <div><dt>Негатив среди queue-related</dt><dd>{negative}</dd></div>
+        <div><dt>Негатив среди отзывов про очереди</dt><dd>{negative}</dd></div>
       </dl>
     </article>
   );
@@ -546,7 +548,7 @@ function RevenueScenarioChart() {
 
 function SatisfactionChart() {
   return (
-    <DashboardCard title="Индекс качества визита" note="условная proxy-оценка">
+    <DashboardCard title="Индекс качества визита" note="условная оценка модели">
       <div className="scoreGaugeGrid">
         <ScoreGauge label="Без продукта" value={58.3} />
         <ScoreGauge label="С продуктом" value={61.1} highlight />
