@@ -2,63 +2,58 @@
 
 ## Summary
 
-Combined the completed design-system, evidence-integration, and risk-simulation work. The frontend keeps the dark operator control-room foundation, map-first hero surface, queue heat states, slot inventory visuals, and dashboard/card primitives from `feat/design-system`, while preserving the evidence-backed narrative, softened claims, provenance labels, and evidence map from `feat/evidence-integration`.
+Redesigned the frontend landing page as a serious operator control-room pilot proposal for Dream Queue AI. The page now frames the project as a research MVP and focused indoor theme park discovery pilot, with virtual queue slots, wait prediction, guest routing, risk controls, and limited governed priority inventory.
 
-The simulation/model layer now includes operational risk realism from `feat/risk-simulation`: no-shows, late arrivals, grace/release handling, route compliance, ride downtime, paid capacity caps, standby protection, kiosk share, staff overrides, and abandonments.
+The redesign keeps the scope narrow: 4-8 weeks, 5-8 bottleneck attractions, peak windows, baseline measurement first, QR validation, operator dashboard, and before/after analysis.
 
-All operational values are assumptions. Simulation and financial artifacts label results as model outputs or scenario outputs, not measured Dream Island data.
+## Files Changed
 
-## Design-System Work Preserved
+- `web/src/App.tsx`
+- `web/src/styles.css`
+- `RUN_REPORT.md`
 
-- Dark command-center background and custom CSS map composition.
-- Abstract indoor park flow map with route lines, heat-state nodes, and VQ slot inventory blocks.
-- Shared card, panel, chart, KPI, source, alert, and pilot checklist styling.
-- Restrained teal, green, amber, and red operational states instead of generic purple AI gradients.
-- Evidence/provenance pill styling integrated into the dark visual foundation.
+## Sections Added / Changed
 
-## Evidence-Integration Work Preserved
+- Hero: new headline around managing guest time, not skipping or eliminating queues.
+- Hero visual: custom abstract indoor park map with route paths, heat nodes, slot inventory, operator alerts, and model-output metrics.
+- Problem: capacity is fixed; opportunity is timing, routing, governance, visibility, and fairness.
+- Evidence map: Genting/Alibaba, China smart tourism, comparable vendors, Disney/category patterns, and Dream Island pilot fit.
+- How it works: ticket/group, VQ slot, freed waiting time, route/incentive, QR validation, operator dashboard.
+- Simulation/model: uses current risk-aware outputs and visible stress framing.
+- Risk controls: late arrivals, no-shows, QR fraud, scalpers, app exclusion, downtime, fairness, route compliance, minimum PII, staff SOP.
+- Pilot proposal: narrow measured discovery pilot rather than platform replacement.
+- Data request / next step: asks for real park data and discovery/pilot validation, not product purchase.
 
-- Dream Queue AI is framed as a research MVP and focused pilot proposal, not a proven production product.
-- Genting/Alibaba are framed as category evidence, not proof of Dream Queue economics.
-- China market evidence supports hybrid reservations, offline fallback, anti-scalper controls, and minimum PII.
-- Vendor and Disney evidence are treated as category and operating-pattern evidence, not audited KPI proof.
-- Dream Island relevance remains a 4-8 week pilot on 5-8 bottleneck attractions and peak windows, with baseline measurement first.
-- Public-facing numbers remain labelled as Source, Assumption, Model output, or Pilot hypothesis where needed.
+## Visual Decisions
 
-## Risk-Simulation Work Preserved
+- Dark command-center foundation with restrained teal, green, amber, and red operational states.
+- Custom CSS/SVG map instead of stock images or IP-like visuals.
+- Dashboard panels use compact operational labels, evidence badges, slot inventory blocks, route paths, and alert cards.
+- Mobile layout collapses to single-column sections with stable map, metric, risk, and data request panels.
 
-- Added `risk_assumptions` to `configs/assumptions.yaml`.
-- Updated optimized simulation logic for no-shows, late arrivals, grace/release handling, route compliance, downtime, paid capacity caps, standby protection, kiosk share, staff overrides, and abandonments.
-- Added `tests/test_risk_simulation.py`.
-- Updated report/chart outputs and frontend model numbers to risk-aware scenario outputs.
+## Claims / Provenance Safeguards
 
-## Risk Variables Added
+- Every material model number is labelled or adjacent to `Model output`.
+- Pilot framing is labelled as `Pilot hypothesis` and assumption-led.
+- Genting/Alibaba are described as category evidence, not economics proof.
+- Simulation values are explicitly stated as local scenario outputs, not measured Dream Island data.
+- The page avoids claims that VQ eliminates queues, guarantees revenue uplift, or proves Dream Island has a confirmed queue problem.
+- Risk stress output remains visible to show that benefits can break under poor assumptions.
 
-- `no_show_rate`
-- `late_arrival_rate`
-- `grace_period_minutes`
-- `slot_release_after_minutes`
-- `route_compliance_rate`
-- `ride_downtime_probability`
-- `paid_capacity_cap`
-- `standby_penalty_threshold`
-- `kiosk_share`
-- `staff_override_rate`
-- `abandon_rate`
+## Build / Test Result
 
-## Risk-Aware Base Outputs
+- `cd web && npm run build` passed.
+- `python3 -m unittest tests/test_risk_simulation.py` passed.
 
-- Baseline remains a physical-queue reference: average wait `82.0` minutes, max queue `1549.5`.
-- Base optimized scenario is risk-aware: average wait `72.3` minutes, max queue `967.25`, paid slots sold `290`, peak-day fast-slot revenue `145000` RUB.
-- `simulation_summary.json` includes a `risk_stress` scenario output showing that VQ/routing benefits can reduce or break under poor operating assumptions.
+## Known Issues
 
-## Validation Notes
+- No browser screenshot review was performed in this run.
+- Existing unused demo page/component files remain in `web/src/pages` and `web/src/components`; the landing page entrypoint does not import them.
 
-Before the risk merge, `MERGE_REPORT.md` recorded a passing frontend build after dependency install. The risk branch also reported passing:
+## Manual Review Steps
 
-- `python3 -m unittest tests/test_risk_simulation.py`
-- `python3 src/simulation/baseline_simulation.py`
-- `python3 src/simulation/optimized_simulation.py`
-- `python3 src/model/scenario_runner.py`
-- `python3 src/simulation/visualization.py`
-- `cd web && npm run build`
+1. Start the local web server with `cd web && npm run dev`.
+2. Review desktop hero at `http://127.0.0.1:5178`.
+3. Check mobile widths around 390px and 720px for map, hero text, risk cards, and data request layout.
+4. Verify public-facing copy still follows `research/claims_policy.md`.
+5. Confirm no section implies measured Dream Island performance or guaranteed queue/revenue outcomes.
