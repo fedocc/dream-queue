@@ -1,0 +1,307 @@
+{
+  "source_file": "data/external/disneyland_reviews.csv",
+  "dataset_role": "external benchmark, not Ostrov Mechty evidence",
+  "method_note": "Keyword and rating based metrics for comparability with the local review pipeline.",
+  "overall": {
+    "total_reviews": 42656,
+    "queue_related_count": 22235,
+    "queue_related_share": 0.5213,
+    "negative_count_among_queue_related": 7394,
+    "negative_share_among_queue_related": 0.3325,
+    "price_related_count": 15958,
+    "price_related_share": 0.3741,
+    "crowd_related_count": 10939,
+    "crowd_related_share": 0.2564,
+    "fastpass_related_count": 7320,
+    "fastpass_related_share": 0.1716,
+    "frequent_queue_terms": [
+      {
+        "term": "rides",
+        "count": 25942
+      },
+      {
+        "term": "not",
+        "count": 23916
+      },
+      {
+        "term": "time",
+        "count": 21923
+      },
+      {
+        "term": "day",
+        "count": 20827
+      },
+      {
+        "term": "get",
+        "count": 18916
+      },
+      {
+        "term": "can",
+        "count": 15270
+      },
+      {
+        "term": "ride",
+        "count": 14855
+      },
+      {
+        "term": "one",
+        "count": 14151
+      },
+      {
+        "term": "your",
+        "count": 12654
+      },
+      {
+        "term": "just",
+        "count": 11889
+      },
+      {
+        "term": "which",
+        "count": 11377
+      },
+      {
+        "term": "would",
+        "count": 10843
+      },
+      {
+        "term": "food",
+        "count": 10514
+      },
+      {
+        "term": "great",
+        "count": 10204
+      },
+      {
+        "term": "more",
+        "count": 10108
+      }
+    ]
+  },
+  "by_branch": {
+    "Disneyland_California": {
+      "total_reviews": 19406,
+      "queue_related_count": 10041,
+      "queue_related_share": 0.5174,
+      "negative_count_among_queue_related": 2885,
+      "negative_share_among_queue_related": 0.2873,
+      "price_related_count": 6184,
+      "price_related_share": 0.3187,
+      "crowd_related_count": 6048,
+      "crowd_related_share": 0.3117,
+      "fastpass_related_count": 4411,
+      "fastpass_related_share": 0.2273,
+      "frequent_queue_terms": [
+        {
+          "term": "rides",
+          "count": 10730
+        },
+        {
+          "term": "time",
+          "count": 9878
+        },
+        {
+          "term": "day",
+          "count": 9347
+        },
+        {
+          "term": "get",
+          "count": 8912
+        },
+        {
+          "term": "not",
+          "count": 8730
+        },
+        {
+          "term": "ride",
+          "count": 7236
+        },
+        {
+          "term": "can",
+          "count": 6894
+        },
+        {
+          "term": "your",
+          "count": 5653
+        },
+        {
+          "term": "one",
+          "count": 5592
+        },
+        {
+          "term": "fast",
+          "count": 5446
+        },
+        {
+          "term": "wait",
+          "count": 5187
+        },
+        {
+          "term": "pass",
+          "count": 5141
+        },
+        {
+          "term": "lines",
+          "count": 5059
+        },
+        {
+          "term": "just",
+          "count": 4763
+        },
+        {
+          "term": "line",
+          "count": 4685
+        }
+      ]
+    },
+    "Disneyland_HongKong": {
+      "total_reviews": 9620,
+      "queue_related_count": 4002,
+      "queue_related_share": 0.416,
+      "negative_count_among_queue_related": 1002,
+      "negative_share_among_queue_related": 0.2504,
+      "price_related_count": 3113,
+      "price_related_share": 0.3236,
+      "crowd_related_count": 1854,
+      "crowd_related_share": 0.1927,
+      "fastpass_related_count": 436,
+      "fastpass_related_share": 0.0453,
+      "frequent_queue_terms": [
+        {
+          "term": "rides",
+          "count": 4157
+        },
+        {
+          "term": "not",
+          "count": 4127
+        },
+        {
+          "term": "day",
+          "count": 3712
+        },
+        {
+          "term": "time",
+          "count": 2877
+        },
+        {
+          "term": "get",
+          "count": 2121
+        },
+        {
+          "term": "ride",
+          "count": 2108
+        },
+        {
+          "term": "one",
+          "count": 2081
+        },
+        {
+          "term": "can",
+          "count": 2048
+        },
+        {
+          "term": "kids",
+          "count": 1957
+        },
+        {
+          "term": "food",
+          "count": 1871
+        },
+        {
+          "term": "which",
+          "count": 1623
+        },
+        {
+          "term": "your",
+          "count": 1622
+        },
+        {
+          "term": "long",
+          "count": 1608
+        },
+        {
+          "term": "hong",
+          "count": 1590
+        },
+        {
+          "term": "just",
+          "count": 1576
+        }
+      ]
+    },
+    "Disneyland_Paris": {
+      "total_reviews": 13630,
+      "queue_related_count": 8192,
+      "queue_related_share": 0.601,
+      "negative_count_among_queue_related": 3507,
+      "negative_share_among_queue_related": 0.4281,
+      "price_related_count": 6661,
+      "price_related_share": 0.4887,
+      "crowd_related_count": 3037,
+      "crowd_related_share": 0.2228,
+      "fastpass_related_count": 2473,
+      "fastpass_related_share": 0.1814,
+      "frequent_queue_terms": [
+        {
+          "term": "not",
+          "count": 11059
+        },
+        {
+          "term": "rides",
+          "count": 11055
+        },
+        {
+          "term": "time",
+          "count": 9168
+        },
+        {
+          "term": "get",
+          "count": 7883
+        },
+        {
+          "term": "day",
+          "count": 7768
+        },
+        {
+          "term": "one",
+          "count": 6478
+        },
+        {
+          "term": "which",
+          "count": 6360
+        },
+        {
+          "term": "can",
+          "count": 6328
+        },
+        {
+          "term": "just",
+          "count": 5550
+        },
+        {
+          "term": "ride",
+          "count": 5511
+        },
+        {
+          "term": "food",
+          "count": 5389
+        },
+        {
+          "term": "your",
+          "count": 5379
+        },
+        {
+          "term": "would",
+          "count": 5294
+        },
+        {
+          "term": "some",
+          "count": 4839
+        },
+        {
+          "term": "good",
+          "count": 4757
+        }
+      ]
+    }
+  }
+}
