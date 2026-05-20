@@ -14,6 +14,20 @@ product:
   park_revenue_share: 0.85
   startup_revenue_share: 0.15
 
+risk_assumptions:
+  # All values in this block are assumptions for scenario modeling, not measured Dream Island data.
+  no_show_rate: 0.05
+  late_arrival_rate: 0.08
+  grace_period_minutes: 15
+  slot_release_after_minutes: 10
+  route_compliance_rate: 0.75
+  ride_downtime_probability: 0.01
+  paid_capacity_cap: 0.10
+  standby_penalty_threshold: 60
+  kiosk_share: 0.12
+  staff_override_rate: 0.04
+  abandon_rate: 0.03
+
 effect:
   extra_food_retail_spend_per_guest_rub: 80
   freed_physical_wait_minutes_per_virtual_queue_guest: 30

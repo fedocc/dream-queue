@@ -34,13 +34,13 @@ const disneylandBenchmark = {
 
 const simulation = {
   baselineWait: 82.0,
-  optimizedWait: 74.18,
+  optimizedWait: 72.3,
   baselineMaxQueue: 1549.5,
-  optimizedMaxQueue: 1066.0,
+  optimizedMaxQueue: 967.25,
   baselineVariance: 102106.98,
-  optimizedVariance: 10484.87,
-  paidSlots: 469,
-  peakRevenue: 234500,
+  optimizedVariance: 5432.35,
+  paidSlots: 290,
+  peakRevenue: 145000,
 };
 
 const scenarios = [
@@ -49,36 +49,36 @@ const scenarios = [
     label: "Консервативный",
     price: "300 ₽",
     conversion: "2%",
-    slots: 189,
-    revenue: "5.1 млн ₽",
-    parkUplift: "18.5 млн ₽",
+    slots: 32,
+    revenue: "0.9 млн ₽",
+    parkUplift: "14.9 млн ₽",
   },
   {
     name: "Base",
     label: "Базовый",
     price: "500 ₽",
     conversion: "5%",
-    slots: 469,
-    revenue: "21.1 млн ₽",
-    parkUplift: "42.7 млн ₽",
+    slots: 290,
+    revenue: "13.1 млн ₽",
+    parkUplift: "35.9 млн ₽",
   },
   {
     name: "Aggressive",
     label: "Агрессивный",
     price: "700 ₽",
     conversion: "10%",
-    slots: 840,
-    revenue: "52.9 млн ₽",
-    parkUplift: "80.4 млн ₽",
+    slots: 389,
+    revenue: "24.5 млн ₽",
+    parkUplift: "56.3 млн ₽",
   },
 ];
 
 const queueLoads = [
-  ["Мельница", 395, 283],
-  ["Молот судьбы", 374, 284],
-  ["Бешеный танец", 413, 282],
-  ["Лава", 75, 118],
-  ["Лагуна", 69, 128],
+  ["Мельница", 395, 258],
+  ["Молот судьбы", 374, 254],
+  ["Бешеный танец", 413, 256],
+  ["Лава", 75, 116],
+  ["Лагуна", 69, 120],
 ];
 
 const pilotSteps = [
@@ -362,21 +362,21 @@ function App() {
             label="Среднее ожидание"
             before={`${simulation.baselineWait} мин`}
             after={`${simulation.optimizedWait} мин`}
-            delta="-7.8 мин"
+            delta="-9.7 мин"
           />
           <KpiCard
             icon={<BarChart3 size={18} />}
             label="Максимальная очередь"
             before={simulation.baselineMaxQueue.toString()}
             after={simulation.optimizedMaxQueue.toString()}
-            delta="-31%"
+            delta="-38%"
           />
           <KpiCard
             icon={<LineChart size={18} />}
             label="Перекос нагрузки"
             before="102 107"
-            after="10 485"
-            delta="-90%"
+            after="5 432"
+            delta="-95%"
           />
         </div>
         <div className="chartsGrid">
@@ -631,8 +631,8 @@ function QueueLoadChart() {
 }
 
 function RevenueScenarioChart() {
-  const values = [5.1, 21.1, 52.9];
-  const max = 55;
+  const values = [0.9, 13.1, 24.5];
+  const max = 25;
   return (
     <DashboardCard title="Выручка от быстрых слотов" note="млн ₽ в год">
       <div className="verticalBars">
@@ -655,7 +655,7 @@ function SatisfactionChart() {
     <DashboardCard title="Индекс качества визита" note="условная оценка модели">
       <div className="scoreGaugeGrid">
         <ScoreGauge label="Без продукта" value={58.3} />
-        <ScoreGauge label="С продуктом" value={61.1} highlight />
+        <ScoreGauge label="С продуктом" value={61.7} highlight />
       </div>
     </DashboardCard>
   );

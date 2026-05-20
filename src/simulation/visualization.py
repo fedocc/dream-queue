@@ -87,7 +87,24 @@ def main() -> None:
     REPORTS.mkdir(parents=True, exist_ok=True)
     baseline = run_baseline()
     optimized = run_optimized()
-    summary = {"baseline": baseline.__dict__, "optimized": optimized.__dict__}
+    risk_stress = run_optimized(
+        risk_overrides={
+            "no_show_rate": 0.25,
+            "late_arrival_rate": 0.35,
+            "ride_downtime_probability": 0.35,
+            "route_compliance_rate": 0.25,
+            "staff_override_rate": 0.20,
+            "abandon_rate": 0.18,
+            "paid_capacity_cap": 0.04,
+        }
+    )
+    summary = {
+        "label": "scenario outputs",
+        "note": "Simulation values are model outputs from configured assumptions, not measured Dream Island data.",
+        "baseline": baseline.__dict__,
+        "optimized": optimized.__dict__,
+        "risk_stress": risk_stress.__dict__,
+    }
     (REPORTS / "simulation_summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
     revenue = read_revenue_scenarios()
 

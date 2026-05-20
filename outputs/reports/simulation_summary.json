@@ -1,4 +1,6 @@
 {
+  "label": "scenario outputs",
+  "note": "Simulation values are model outputs from configured assumptions, not measured Dream Island data.",
   "baseline": {
     "mode": "baseline",
     "avg_wait_time": 82.0,
@@ -17,26 +19,126 @@
       "Лианы": 30.41,
       "Бешеный танец": 413.2,
       "На крыльях ветра": 73.1
-    }
+    },
+    "output_label": "model output",
+    "assumptions_used": {},
+    "assumption_labels": {},
+    "risk_outputs": {}
   },
   "optimized": {
     "mode": "optimized_base",
-    "avg_wait_time": 74.18,
-    "max_queue_length": 1066.0,
-    "attractions_completed_per_visitor": 2.02,
-    "visitor_satisfaction_score": 61.1,
-    "paid_slots_sold": 469,
-    "revenue_generated": 234500.0,
-    "queue_variance": 10484.87,
+    "avg_wait_time": 72.3,
+    "max_queue_length": 967.25,
+    "attractions_completed_per_visitor": 2.0,
+    "visitor_satisfaction_score": 61.7,
+    "paid_slots_sold": 290,
+    "revenue_generated": 145000.0,
+    "queue_variance": 5432.35,
     "attraction_loads": {
-      "Мельница": 283.47,
-      "Молот судьбы": 284.27,
-      "Иммерсивный полёт": 120.54,
-      "Лагуна": 128.36,
-      "Лава": 117.51,
-      "Лианы": 95.74,
-      "Бешеный танец": 282.07,
-      "На крыльях ветра": 117.38
+      "Мельница": 257.93,
+      "Молот судьбы": 254.13,
+      "Иммерсивный полёт": 129.92,
+      "Лагуна": 120.28,
+      "Лава": 116.13,
+      "Лианы": 115.03,
+      "Бешеный танец": 256.27,
+      "На крыльях ветра": 125.36
+    },
+    "output_label": "model output",
+    "assumptions_used": {
+      "no_show_rate": 0.05,
+      "late_arrival_rate": 0.08,
+      "grace_period_minutes": 15.0,
+      "slot_release_after_minutes": 10.0,
+      "route_compliance_rate": 0.75,
+      "ride_downtime_probability": 0.01,
+      "paid_capacity_cap": 0.1,
+      "standby_penalty_threshold": 60.0,
+      "kiosk_share": 0.12,
+      "staff_override_rate": 0.04,
+      "abandon_rate": 0.03
+    },
+    "assumption_labels": {
+      "no_show_rate": "assumption",
+      "late_arrival_rate": "assumption",
+      "grace_period_minutes": "assumption",
+      "slot_release_after_minutes": "assumption",
+      "route_compliance_rate": "assumption",
+      "ride_downtime_probability": "assumption",
+      "paid_capacity_cap": "assumption",
+      "standby_penalty_threshold": "assumption",
+      "kiosk_share": "assumption",
+      "staff_override_rate": "assumption",
+      "abandon_rate": "assumption"
+    },
+    "risk_outputs": {
+      "output_label": "model output",
+      "paid_slot_no_shows": 16,
+      "late_arrivals": 19,
+      "abandoned_slots": 7,
+      "staff_overrides": 0,
+      "downtime_steps": 7,
+      "kiosk_bookings": 31,
+      "effective_paid_capacity_share": 0.1,
+      "effective_routing_strength": 0.3375
+    }
+  },
+  "risk_stress": {
+    "mode": "optimized_base",
+    "avg_wait_time": 162.99,
+    "max_queue_length": 1685.75,
+    "attractions_completed_per_visitor": 1.35,
+    "visitor_satisfaction_score": 27.0,
+    "paid_slots_sold": 0,
+    "revenue_generated": 0.0,
+    "queue_variance": 7933.63,
+    "attraction_loads": {
+      "Мельница": 438.73,
+      "Молот судьбы": 393.0,
+      "Иммерсивный полёт": 345.79,
+      "Лагуна": 329.21,
+      "Лава": 319.95,
+      "Лианы": 311.38,
+      "Бешеный танец": 398.0,
+      "На крыльях ветра": 332.67
+    },
+    "output_label": "model output",
+    "assumptions_used": {
+      "no_show_rate": 0.25,
+      "late_arrival_rate": 0.35,
+      "grace_period_minutes": 15.0,
+      "slot_release_after_minutes": 10.0,
+      "route_compliance_rate": 0.25,
+      "ride_downtime_probability": 0.35,
+      "paid_capacity_cap": 0.04,
+      "standby_penalty_threshold": 60.0,
+      "kiosk_share": 0.12,
+      "staff_override_rate": 0.2,
+      "abandon_rate": 0.18
+    },
+    "assumption_labels": {
+      "no_show_rate": "assumption",
+      "late_arrival_rate": "assumption",
+      "grace_period_minutes": "assumption",
+      "slot_release_after_minutes": "assumption",
+      "route_compliance_rate": "assumption",
+      "ride_downtime_probability": "assumption",
+      "paid_capacity_cap": "assumption",
+      "standby_penalty_threshold": "assumption",
+      "kiosk_share": "assumption",
+      "staff_override_rate": "assumption",
+      "abandon_rate": "assumption"
+    },
+    "risk_outputs": {
+      "output_label": "model output",
+      "paid_slot_no_shows": 0,
+      "late_arrivals": 0,
+      "abandoned_slots": 0,
+      "staff_overrides": 0,
+      "downtime_steps": 335,
+      "kiosk_bookings": 0,
+      "effective_paid_capacity_share": 0.04,
+      "effective_routing_strength": 0.1125
     }
   }
 }

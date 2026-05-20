@@ -1,7 +1,7 @@
 const scenarios = [
-  ["Conservative", 0.42],
-  ["Base", 1.4],
-  ["Aggressive", 3.92],
+  ["Conservative", 0.01],
+  ["Base", 0.15],
+  ["Aggressive", 0.27],
 ];
 
 export default function RevenueChart() {
@@ -11,7 +11,7 @@ export default function RevenueChart() {
       {scenarios.map(([name, value]) => (
         <div className="revenueRow" key={name}>
           <span>{name}</span>
-          <div><i style={{ width: `${Number(value) * 22}%` }} /></div>
+          <div><i style={{ width: `${(Number(value) / 0.27) * 100}%` }} /></div>
           <b>{value} млн ₽ scenario</b>
         </div>
       ))}

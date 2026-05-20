@@ -2,7 +2,11 @@
 
 ## Summary
 
-Combined the completed design-system and evidence-integration work after resolving the merge. The frontend keeps the dark operator control-room foundation, map-first hero surface, queue heat states, slot inventory visuals, and dashboard/card primitives from `feat/design-system`, while preserving the evidence-backed narrative, softened claims, provenance labels, and evidence map from `feat/evidence-integration`.
+Combined the completed design-system, evidence-integration, and risk-simulation work. The frontend keeps the dark operator control-room foundation, map-first hero surface, queue heat states, slot inventory visuals, and dashboard/card primitives from `feat/design-system`, while preserving the evidence-backed narrative, softened claims, provenance labels, and evidence map from `feat/evidence-integration`.
+
+The simulation/model layer now includes operational risk realism from `feat/risk-simulation`: no-shows, late arrivals, grace/release handling, route compliance, ride downtime, paid capacity caps, standby protection, kiosk share, staff overrides, and abandonments.
+
+All operational values are assumptions. Simulation and financial artifacts label results as model outputs or scenario outputs, not measured Dream Island data.
 
 ## Design-System Work Preserved
 
@@ -21,29 +25,40 @@ Combined the completed design-system and evidence-integration work after resolvi
 - Dream Island relevance remains a 4-8 week pilot on 5-8 bottleneck attractions and peak windows, with baseline measurement first.
 - Public-facing numbers remain labelled as Source, Assumption, Model output, or Pilot hypothesis where needed.
 
-## Files Covered By The Merge
+## Risk-Simulation Work Preserved
 
-- `README.md`
-- `project_brief.md`
-- `research/evidence_map.md`
-- `research/benchmarks/comparison_table.md`
-- `research/pitch_strategy.md`
-- `research/product_application.md`
-- `research/site_storyline.md`
-- `web/src/App.tsx`
-- `web/src/styles.css`
-- `web/src/components/AttractionCard.tsx`
-- `web/src/components/QueueTimeline.tsx`
-- `web/src/components/RevenueChart.tsx`
-- `web/src/pages/GuestView.tsx`
-- `web/src/pages/OperatorDashboard.tsx`
-- `web/src/pages/SimulationView.tsx`
+- Added `risk_assumptions` to `configs/assumptions.yaml`.
+- Updated optimized simulation logic for no-shows, late arrivals, grace/release handling, route compliance, downtime, paid capacity caps, standby protection, kiosk share, staff overrides, and abandonments.
+- Added `tests/test_risk_simulation.py`.
+- Updated report/chart outputs and frontend model numbers to risk-aware scenario outputs.
 
-## Build Result Before This Conflict Resolution
+## Risk Variables Added
 
-Both branches previously reported the same local dependency issue:
+- `no_show_rate`
+- `late_arrival_rate`
+- `grace_period_minutes`
+- `slot_release_after_minutes`
+- `route_compliance_rate`
+- `ride_downtime_probability`
+- `paid_capacity_cap`
+- `standby_penalty_threshold`
+- `kiosk_share`
+- `staff_override_rate`
+- `abandon_rate`
 
-- Initial `npm run build` failed because `vite` was not installed in `web/node_modules`.
-- After `npm install` in `web`, `npm run build` passed in both branch reports.
+## Risk-Aware Base Outputs
 
-See `MERGE_REPORT.md` for the build result after the conflict resolution commit.
+- Baseline remains a physical-queue reference: average wait `82.0` minutes, max queue `1549.5`.
+- Base optimized scenario is risk-aware: average wait `72.3` minutes, max queue `967.25`, paid slots sold `290`, peak-day fast-slot revenue `145000` RUB.
+- `simulation_summary.json` includes a `risk_stress` scenario output showing that VQ/routing benefits can reduce or break under poor operating assumptions.
+
+## Validation Notes
+
+Before the risk merge, `MERGE_REPORT.md` recorded a passing frontend build after dependency install. The risk branch also reported passing:
+
+- `python3 -m unittest tests/test_risk_simulation.py`
+- `python3 src/simulation/baseline_simulation.py`
+- `python3 src/simulation/optimized_simulation.py`
+- `python3 src/model/scenario_runner.py`
+- `python3 src/simulation/visualization.py`
+- `cd web && npm run build`
