@@ -19,15 +19,15 @@
 
 ## Первый экран
 
-Цель: за 5 секунд объяснить коммерческую ценность.
+Цель: за 5 секунд объяснить пилотную гипотезу и evidence posture.
 
 Вариант headline:
 
-> Очереди стоят парку денег.
+> Пилотный слой управления временем гостя.
 
 Supporting copy:
 
-> Dream Queue AI помогает «Острову Мечты» управлять потоками гостей, снижать физическое ожидание и создавать дополнительную выручку через ограниченные fast slots.
+> Dream Queue AI предлагает проверить virtual queue slots, wait prediction, guest routing, risk controls и ограниченное priority inventory на выбранных bottleneck attractions.
 
 Primary CTA:
 
@@ -39,12 +39,12 @@ Secondary CTA:
 
 ## Структура страницы
 
-1. Problem: гости стоят в очередях, парк теряет spend и satisfaction.
-2. Evidence: review metrics из seed-выборки с честной пометкой limited sample.
-3. Benchmark: Genting SkyWorlds + Alibaba Cloud как доказательство категории.
-4. Product: virtual queue, forecasting, routing, paid fast slots, operator dashboard.
-5. Simulation: baseline vs optimized, wait time, queue variance, revenue.
-6. Pilot plan: 4-8 недель, ограниченный набор аттракционов, без замены инфраструктуры.
+1. Problem: physical waiting may reduce perceived value and available time in other zones.
+2. Evidence: review metrics из seed-выборки с честной пометкой Source / limited sample.
+3. Benchmark: Genting SkyWorlds + Alibaba Cloud как category proof, not KPI proof.
+4. Product: virtual queue, forecasting, routing, risk controls, operator dashboard.
+5. Simulation: baseline vs optimized as Model output, not measured park performance.
+6. Pilot plan: 4-8 недель, ограниченный набор аттракционов, baseline first.
 7. Ask: встреча / доступ к данным / paid pilot.
 
 Контентная база для страницы: `research/ostrov_mechty/case_study.md` и `research/product_application.md`.
@@ -69,7 +69,7 @@ Secondary CTA:
 - bottlenecks;
 - wait-time forecast;
 - slot inventory;
-- revenue uplift;
+- scenario revenue;
 - pilot;
 - assumptions;
 - evidence.

@@ -15,13 +15,13 @@ export default function GuestView() {
       <section>
         <div className="pageHeader">
           <span>Guest app</span>
-          <h1>Умный маршрут вместо физического ожидания</h1>
+          <h1>Сценарный маршрут и управляемое окно ожидания</h1>
         </div>
         <div className="routePanel">
           <Sparkles size={20} />
           <div>
-            <strong>Рекомендация маршрута</strong>
-            <p>Сначала Ночное Дерби, затем Кобра через free slot 15:45. Мельницу лучше забронировать на 16:20.</p>
+            <strong>Рекомендация маршрута (pilot hypothesis)</strong>
+            <p>Сначала Ночное Дерби, затем Кобра через free slot 15:45. Мельницу лучше проверить как bottleneck slot на 16:20.</p>
           </div>
         </div>
         <div className="cardList">
@@ -40,4 +40,3 @@ export default function GuestView() {
     </div>
   );
 }
-

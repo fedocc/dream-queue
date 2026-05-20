@@ -2,35 +2,48 @@
 
 ## Summary
 
-Created a focused visual design system for the Dream Queue AI web pitch: a dark operator control room foundation, map-first hero surface, reusable evidence badge, queue heat states, slot inventory visuals, and consistent dashboard/card primitives.
+Combined the completed design-system and evidence-integration work after resolving the merge. The frontend keeps the dark operator control-room foundation, map-first hero surface, queue heat states, slot inventory visuals, and dashboard/card primitives from `feat/design-system`, while preserving the evidence-backed narrative, softened claims, provenance labels, and evidence map from `feat/evidence-integration`.
 
-## Files Changed
+## Design-System Work Preserved
 
+- Dark command-center background and custom CSS map composition.
+- Abstract indoor park flow map with route lines, heat-state nodes, and VQ slot inventory blocks.
+- Shared card, panel, chart, KPI, source, alert, and pilot checklist styling.
+- Restrained teal, green, amber, and red operational states instead of generic purple AI gradients.
+- Evidence/provenance pill styling integrated into the dark visual foundation.
+
+## Evidence-Integration Work Preserved
+
+- Dream Queue AI is framed as a research MVP and focused pilot proposal, not a proven production product.
+- Genting/Alibaba are framed as category evidence, not proof of Dream Queue economics.
+- China market evidence supports hybrid reservations, offline fallback, anti-scalper controls, and minimum PII.
+- Vendor and Disney evidence are treated as category and operating-pattern evidence, not audited KPI proof.
+- Dream Island relevance remains a 4-8 week pilot on 5-8 bottleneck attractions and peak windows, with baseline measurement first.
+- Public-facing numbers remain labelled as Source, Assumption, Model output, or Pilot hypothesis where needed.
+
+## Files Covered By The Merge
+
+- `README.md`
+- `project_brief.md`
+- `research/evidence_map.md`
+- `research/benchmarks/comparison_table.md`
+- `research/pitch_strategy.md`
+- `research/product_application.md`
+- `research/site_storyline.md`
 - `web/src/App.tsx`
 - `web/src/styles.css`
-- `RUN_REPORT.md`
+- `web/src/components/AttractionCard.tsx`
+- `web/src/components/QueueTimeline.tsx`
+- `web/src/components/RevenueChart.tsx`
+- `web/src/pages/GuestView.tsx`
+- `web/src/pages/OperatorDashboard.tsx`
+- `web/src/pages/SimulationView.tsx`
 
-## Visual Decisions
+## Build Result Before This Conflict Resolution
 
-- Replaced the beige, stock-image-led visual direction with a dark command-center background and custom CSS map composition.
-- Added an abstract indoor park flow map with route lines, heat-state nodes, and VQ slot inventory blocks.
-- Standardized card, panel, chart, KPI, source, alert, and pilot checklist styling through shared CSS tokens.
-- Used restrained teal, green, amber, and red operational states instead of generic purple AI gradients.
-- Introduced evidence/provenance pill styling for source and model labels.
-- Preserved existing research copy, model values, and simulation formulas.
+Both branches previously reported the same local dependency issue:
 
-## Build Result
+- Initial `npm run build` failed because `vite` was not installed in `web/node_modules`.
+- After `npm install` in `web`, `npm run build` passed in both branch reports.
 
-- First `npm run build` failed because `vite` was not installed in local `web/node_modules`.
-- Ran `npm install` from the existing `web/package-lock.json`.
-- Retried `npm run build`; result: success.
-- Final build output: Vite 7.3.3 built successfully in 612 ms.
-
-## Known Issues
-
-- No browser screenshot pass was performed in this task.
-- Some unused page/component files still exist in `web/src`; they were only lightly covered by shared CSS primitives because this task was scoped to the design system, not a full app rewrite.
-
-## Recommended Next Step
-
-Run the frontend redesign task next to apply this design system across the full landing structure and perform visual QA at desktop and mobile widths.
+See `MERGE_REPORT.md` for the build result after the conflict resolution commit.

@@ -21,9 +21,9 @@ export default function SimulationView() {
         <button className={mode === "optimized" ? "selected" : ""} onClick={() => setMode("optimized")}>С продуктом</button>
       </div>
       <div className="metricGrid wide">
-        <div className="metric"><Activity size={19} /><span>Среднее ожидание</span><strong>{current.wait} мин</strong></div>
-        <div className="metric"><Users size={19} /><span>Аттракционов на гостя</span><strong>{current.attractions}</strong></div>
-        <div className="metric"><Coins size={19} /><span>Fast-pass выручка</span><strong>{current.revenue.toLocaleString("ru-RU")} ₽</strong></div>
+        <div className="metric"><Activity size={19} /><span>Среднее ожидание scenario</span><strong>{current.wait} мин</strong></div>
+        <div className="metric"><Users size={19} /><span>Аттракционов на гостя scenario</span><strong>{current.attractions}</strong></div>
+        <div className="metric"><Coins size={19} /><span>Fast-pass model output</span><strong>{current.revenue.toLocaleString("ru-RU")} ₽</strong></div>
       </div>
       <div className="simulationCharts">
         <div className="beforeAfter">
@@ -32,11 +32,10 @@ export default function SimulationView() {
         </div>
         <RevenueChart />
         <div className="upliftBox">
-          <strong>Итоговый uplift</strong>
-          <p>-34% к среднему ожиданию, +27% к количеству посещенных аттракционов, 1.4 млн ₽ fast-slot revenue в базовом peak-day сценарии.</p>
+          <strong>Model output, not measured park performance</strong>
+          <p>Scenario comparison under assumptions: wait, visits and fast-slot revenue must be validated against baseline park data before use as claims.</p>
         </div>
       </div>
     </div>
   );
 }
-

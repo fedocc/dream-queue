@@ -92,22 +92,56 @@ const dataSources = [
   {
     title: "Отзывы",
     value: "328",
-    text: "локально сохраненных строк отзывов по «Острову Мечты»",
+    label: "Source",
+    text: "локально сохраненных строк review-evidence по «Острову Мечты»",
   },
   {
     title: "Публичные факты",
     value: "8",
-    text: "официальных страниц аттракционов и публичных описаний",
+    label: "Source",
+    text: "официальных страниц и публичных описаний",
   },
   {
     title: "Внешний ориентир",
     value: "42 656",
+    label: "Source",
     text: "отзывов Disneyland Reviews для проверки методики",
   },
   {
     title: "Расчеты модели",
     value: "3",
+    label: "Model output",
     text: "сценария экономики: conservative, base, aggressive",
+  },
+];
+
+const provenanceLabels = [
+  ["Source", "подтверждено публичным источником или repo artifact"],
+  ["Assumption", "вход модели или пилота до данных парка"],
+  ["Model output", "результат локальной симуляции или финмодели"],
+  ["Pilot hypothesis", "тезис для проверки в 4-8 недель пилота"],
+];
+
+const evidenceMap = [
+  {
+    title: "Genting / Alibaba",
+    proves: "VQ + itinerary + incentives + crowd prediction is a real operating pattern.",
+    limit: "Не раскрывает revenue uplift, wait reduction, accuracy, no-show rate or implementation cost.",
+  },
+  {
+    title: "China market lesson",
+    proves: "Reservations need hybrid access, offline fallback, anti-scalper controls and lower PII burden.",
+    limit: "Не доказывает московский спрос или экономику Dream Island.",
+  },
+  {
+    title: "Similar vendors",
+    proves: "accesso, Attractions.io and Lineberty show mature VQ, validation, dashboard and group-control patterns.",
+    limit: "Vendor KPI claims are not independent audited facts.",
+  },
+  {
+    title: "Dream Island fit",
+    proves: "Public facts support many attractions/shows and existing express/VIP priority products.",
+    limit: "Не знаем real wait times, no-shows, throughput, conversion or standby impact without park data.",
   },
 ];
 
@@ -142,10 +176,11 @@ function App() {
               <Landmark size={16} />
               Кейс: Остров Мечты, Москва
             </div>
-            <h1>Операционный слой для очередей, слотов и гостевых потоков.</h1>
+            <h1>Пилотный слой для очередей, слотов и гостевых потоков.</h1>
             <p>
-              Исследовательский MVP для «Острова Мечты»: отзывы, внешний ориентир по индустрии,
-              симуляция очередей и сценарная экономика быстрых слотов.
+              Research MVP для indoor theme parks: virtual queue slots, wait prediction,
+              guest routing, risk controls и ограниченный priority inventory. Для «Острова Мечты»
+              это предложение пилота, а не доказанный production product.
             </p>
             <div className="heroActions">
               <a className="primaryButton" href="#simulation">
@@ -162,7 +197,7 @@ function App() {
                 <span>Control room / Peak window</span>
                 <strong>Map-first guest flow</strong>
               </div>
-              <EvidenceBadge label="Модель" />
+              <EvidenceBadge label="Model output" />
             </div>
             <ParkFlowMap />
             <div className="surfaceMetrics">
@@ -182,7 +217,7 @@ function App() {
           <span><b>ETA</b> Прогноз ожидания</span>
           <span><b>Route</b> Маршруты гостей</span>
           <span><b>Slots</b> Инвентарь быстрых слотов</span>
-          <span><b>Ops</b> Дашборд оператора</span>
+          <span><b>Risk</b> Контроли и provenance</span>
         </div>
       </section>
 
@@ -202,8 +237,17 @@ function App() {
             <article className="sourceCard" key={source.title}>
               <EvidenceBadge label={source.title} />
               <strong>{source.value}</strong>
+              <em>{source.label}</em>
               <p>{source.text}</p>
             </article>
+          ))}
+        </div>
+        <div className="provenanceLegend" aria-label="Provenance labels">
+          {provenanceLabels.map(([label, text]) => (
+            <div key={label}>
+              <span className="provenanceChip">{label}</span>
+              <p>{text}</p>
+            </div>
           ))}
         </div>
         <div className="methodNote">
@@ -225,9 +269,9 @@ function App() {
             <strong>Продуктовый вывод</strong>
           </div>
           <p>
-            Начинать пилот нужно с выбранных проблемных аттракционов и пиковых временных окон, где ожидание
-            снижает ощущаемую ценность билета и создает пространство для бесплатной виртуальной очереди
-            и ограниченных платных быстрых слотов.
+            Начинать пилот нужно с выбранных bottleneck attractions и пиковых временных окон.
+            Review-evidence дает ранний сигнал, а реальную силу проблемы должны подтвердить baseline
+            observations, throughput data and staff constraints.
           </p>
         </div>
       </section>
@@ -264,27 +308,49 @@ function App() {
       <section className="section benchmarkSection">
         <div className="benchmarkPanel">
           <span className="sectionLabel">03 / Доказательство категории</span>
-          <h2>Genting SkyWorlds + Alibaba Cloud уже доказали категорию.</h2>
+          <h2>Genting / Alibaba подтверждают категорию, не экономику Dream Queue.</h2>
           <p>
             Их публичный кейс описывает virtual queue, планирование маршрута, прогноз crowding
-            и стимулы для перераспределения гостей между аттракционами, едой и магазинами. Для «Острова Мечты»
-            мы предлагаем не перестройку всей ИТ-системы, а легкий пилотный слой поверх текущей инфраструктуры.
+            и стимулы для перераспределения гостей. Он не раскрывает guaranteed revenue uplift,
+            wait-time reduction, accuracy, no-show rate or implementation cost.
           </p>
         </div>
         <div className="benchmarkChecks">
-          <CheckItem icon={<Route size={18} />} text="Маршруты и слоты вместо хаотичного ожидания" />
-          <CheckItem icon={<Gauge size={18} />} text="Оператор видит узкие места до пика" />
-          <CheckItem icon={<CircleDollarSign size={18} />} text="Инвентарь быстрых слотов становится управляемой выручкой" />
-          <CheckItem icon={<AlertTriangle size={18} />} text="Риск-контроли видны рядом с коммерческим инвентарем" />
+          <CheckItem icon={<Route size={18} />} text="Ticket-linked VQ, QR validation, group logic and return windows are Source-backed patterns" />
+          <CheckItem icon={<Gauge size={18} />} text="China lesson: hybrid reservations, kiosk/staff fallback, anti-scalper controls and minimum PII" />
+          <CheckItem icon={<CircleDollarSign size={18} />} text="Priority inventory is a pilot hypothesis until capacity, conversion and standby impact are measured" />
+          <CheckItem icon={<AlertTriangle size={18} />} text="Risk controls stay visible next to slot inventory so VQ is not presented as queue elimination" />
+        </div>
+      </section>
+
+      <section className="section evidenceMapSection">
+        <div className="sectionIntro compactIntro">
+          <div className="sectionMeta">
+            <span className="sectionLabel">04 / Evidence map</span>
+            <p>Что можно использовать в pitch и где заканчивается публичное evidence.</p>
+          </div>
+          <h2>What we know / what we do not know.</h2>
+        </div>
+        <div className="evidenceMapGrid">
+          {evidenceMap.map((item) => (
+            <article className="evidenceMapCard" key={item.title}>
+              <h3>{item.title}</h3>
+              <dl>
+                <div><dt>What we know</dt><dd>{item.proves}</dd></div>
+                <div><dt>What we do not know</dt><dd>{item.limit}</dd></div>
+              </dl>
+            </article>
+          ))}
         </div>
       </section>
 
       <section className="section simulationSection" id="simulation">
         <div className="sectionIntro">
           <div className="sectionMeta">
-            <span className="sectionLabel">04 / Симуляция</span>
+            <span className="sectionLabel">05 / Симуляция</span>
             <p>
-              Сценарная модель на допущениях, а не измеренные данные парка. Показывает механику:
+              <span className="provenanceChip inline">Model output</span> Сценарная модель на допущениях,
+              а не измеренные данные парка. Показывает механику:
               спрос перераспределяется, а быстрые слоты ограничены пропускной способностью.
             </p>
           </div>
@@ -322,10 +388,10 @@ function App() {
       <section className="section revenueSection" id="revenue">
         <div className="sectionIntro">
           <div className="sectionMeta">
-            <span className="sectionLabel">05 / Экономика</span>
+            <span className="sectionLabel">06 / Экономика</span>
             <p>
-              Финмодель сравнивает обычный и пиковый день. Если очереди нет, спрос на платное
-              ускорение честно падает до нуля.
+              <span className="provenanceChip inline">Model output</span> Финмодель сравнивает обычный и пиковый день
+              under assumptions. Это не measured park revenue и не обещание uplift.
             </p>
           </div>
           <h2>Деньги считаются из проданных слотов, а не из красивой константы.</h2>
@@ -339,7 +405,7 @@ function App() {
                 <div><dt>Цена слота</dt><dd>{scenario.price}</dd></div>
                 <div><dt>Конверсия</dt><dd>{scenario.conversion}</dd></div>
                 <div><dt>Слоты в пик</dt><dd>{scenario.slots}</dd></div>
-                <div><dt>Эффект для парка</dt><dd>{scenario.parkUplift}</dd></div>
+                <div><dt>Сценарный эффект</dt><dd>{scenario.parkUplift}</dd></div>
               </dl>
             </article>
           ))}
@@ -353,22 +419,22 @@ function App() {
       <section className="section productSection">
         <div className="sectionIntro">
           <div className="sectionMeta">
-            <span className="sectionLabel">06 / Продукт</span>
-            <p>Пилотный слой поверх текущей инфраструктуры: сначала аналитика и дашборд, потом интеграция.</p>
+            <span className="sectionLabel">07 / Продукт</span>
+            <p>Пилотный слой поверх текущей инфраструктуры: сначала baseline, аналитика и дашборд, потом интеграция.</p>
           </div>
           <h2>Что именно получает парк.</h2>
         </div>
         <div className="productGrid">
           <ProductTile icon={<Database size={20} />} title="Карта узких мест" text="Аттракционы и временные окна, где ожидание сильнее всего снижает ощущаемую ценность визита." />
-          <ProductTile icon={<Route size={20} />} title="Маршрутизация гостей" text="Рекомендации маршрута и бесплатные виртуальные слоты, чтобы гость не стоял физически весь визит." />
+          <ProductTile icon={<Route size={20} />} title="Маршрутизация гостей" text="Рекомендации маршрута и бесплатные виртуальные слоты, чтобы часть ожидания переносилась из физической очереди в управляемое окно." />
           <ProductTile icon={<Gauge size={20} />} title="Дашборд оператора" text="Прогноз загрузки, перекос очередей, инвентарь слотов и действия для операционной команды." />
-          <ProductTile icon={<TrendingUp size={20} />} title="Модель выручки" text="Основной эффект считается через высвобожденное время гостей для кафе, магазинов и других зон парка." />
+          <ProductTile icon={<TrendingUp size={20} />} title="Модель выручки" text="Сценарии paid priority и freed-time proxy считаются отдельно от Source evidence и требуют проверки на данных парка." />
         </div>
       </section>
 
       <section className="section pilotSection" id="pilot">
         <div className="pilotCopy">
-          <span className="sectionLabel">07 / Пилот</span>
+          <span className="sectionLabel">08 / Пилот</span>
           <h2>Легкий пилот без замены билетной системы.</h2>
           <p>
             Мы приходим не с готовой истиной про парк, а с проверяемой гипотезой, внешним ориентиром
