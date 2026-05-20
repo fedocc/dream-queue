@@ -8,6 +8,7 @@ import {
   Gauge,
   Landmark,
   LineChart,
+  SearchCheck,
   Route,
   ShieldCheck,
   Sparkles,
@@ -19,8 +20,15 @@ import "./styles.css";
 const reviewMetrics = {
   total: 328,
   queueShare: "29.3%",
+  queueNegativeShare: "31.2%",
   priceShare: "21.6%",
   fastpassShare: "5.5%",
+};
+
+const disneylandBenchmark = {
+  total: "42 656",
+  queueShare: "52.1%",
+  queueNegativeShare: "33.3%",
 };
 
 const simulation = {
@@ -79,6 +87,29 @@ const pilotSteps = [
   "дашборд + симуляция + финмодель",
 ];
 
+const dataSources = [
+  {
+    title: "Review evidence",
+    value: "328",
+    text: "локально сохраненных строк отзывов по «Острову Мечты»",
+  },
+  {
+    title: "Official facts",
+    value: "8",
+    text: "официальных страниц аттракционов и публичных описаний",
+  },
+  {
+    title: "External benchmark",
+    value: "42 656",
+    text: "отзывов Disneyland Reviews для проверки методики",
+  },
+  {
+    title: "Model outputs",
+    value: "3",
+    text: "сценария экономики: conservative, base, aggressive",
+  },
+];
+
 function formatRub(value: number) {
   return value.toLocaleString("ru-RU");
 }
@@ -112,9 +143,8 @@ function App() {
             </div>
             <h1>Очереди стоят парку денег.</h1>
             <p>
-              Dream Queue AI показывает, где гости теряют время, как перераспределить спрос между
-              аттракционами и сколько может дать ограниченный инвентарь быстрых слотов без замены
-              существующей инфраструктуры.
+              Research MVP для «Острова Мечты»: review evidence, benchmark по индустрии,
+              симуляция очередей и сценарная экономика быстрых слотов.
             </p>
             <div className="heroActions">
               <a className="primaryButton" href="#simulation">
@@ -159,17 +189,33 @@ function App() {
           <div className="sectionMeta">
             <span className="sectionLabel">01 / Данные</span>
             <p>
-              Мы расширили seed-выборку до 328 публичных review-evidence строк. Это не репрезентативный
-              опрос всех гостей, но уже достаточный сигнал для pitch.
+              GPT не является источником фактов. Он помогал структурировать анализ, а метрики
+              считаются по локальным CSV, assumptions и model outputs.
             </p>
           </div>
-          <h2>Отзывы стали не финальным доказательством, а картой болей.</h2>
+          <h2>Сначала показываем provenance, потом выводы.</h2>
+        </div>
+        <div className="sourceGrid">
+          {dataSources.map((source) => (
+            <article className="sourceCard" key={source.title}>
+              <span>{source.title}</span>
+              <strong>{source.value}</strong>
+              <p>{source.text}</p>
+            </article>
+          ))}
+        </div>
+        <div className="methodNote">
+          <SearchCheck size={18} />
+          <p>
+            Локальные отзывы показывают early evidence по «Острову Мечты». Disneyland benchmark
+            не заменяет эти данные, а проверяет ту же методику на большом открытом датасете парков.
+          </p>
         </div>
         <div className="evidenceGrid">
           <EvidenceStat value={reviewMetrics.total.toString()} label="строк отзывов в выборке" />
           <EvidenceStat value={reviewMetrics.queueShare} label="упоминают очереди или ожидание" />
+          <EvidenceStat value={reviewMetrics.queueNegativeShare} label="негатив среди отзывов про очереди" />
           <EvidenceStat value={reviewMetrics.priceShare} label="связаны с ценой, билетом или доплатой" />
-          <EvidenceStat value={reviewMetrics.fastpassShare} label="упоминают экспресс-доступ" />
         </div>
         <div className="quoteBand">
           <div>
@@ -183,9 +229,38 @@ function App() {
         </div>
       </section>
 
+      <section className="section benchmarkDataSection">
+        <div className="sectionIntro compactIntro">
+          <div className="sectionMeta">
+            <span className="sectionLabel">02 / Benchmark</span>
+            <p>
+              Внешний датасет нужен не как доказательство по Москве, а как проверка, что pipeline
+              масштабируется на большую выборку из той же индустрии.
+            </p>
+          </div>
+          <h2>Ту же методику прогнали на Disneyland Reviews.</h2>
+        </div>
+        <div className="benchmarkCompare">
+          <BenchmarkColumn
+            title="Остров Мечты"
+            note="локальный seed evidence"
+            total={reviewMetrics.total.toString()}
+            queue={reviewMetrics.queueShare}
+            negative={reviewMetrics.queueNegativeShare}
+          />
+          <BenchmarkColumn
+            title="Disneyland"
+            note="external benchmark"
+            total={disneylandBenchmark.total}
+            queue={disneylandBenchmark.queueShare}
+            negative={disneylandBenchmark.queueNegativeShare}
+          />
+        </div>
+      </section>
+
       <section className="section benchmarkSection">
         <div className="benchmarkPanel">
-          <span className="sectionLabel">02 / Доказательство категории</span>
+          <span className="sectionLabel">03 / Доказательство категории</span>
           <h2>Genting SkyWorlds + Alibaba Cloud уже доказали категорию.</h2>
           <p>
             Их публичный кейс описывает virtual queue, планирование маршрута, прогноз crowding
@@ -203,7 +278,7 @@ function App() {
       <section className="section simulationSection" id="simulation">
         <div className="sectionIntro">
           <div className="sectionMeta">
-            <span className="sectionLabel">03 / Симуляция</span>
+            <span className="sectionLabel">04 / Симуляция</span>
             <p>
               Сценарная модель на assumptions, а не измеренные данные парка. Показывает механику:
               спрос перераспределяется, а быстрые слоты ограничены capacity.
@@ -243,7 +318,7 @@ function App() {
       <section className="section revenueSection" id="revenue">
         <div className="sectionIntro">
           <div className="sectionMeta">
-            <span className="sectionLabel">04 / Экономика</span>
+            <span className="sectionLabel">05 / Экономика</span>
             <p>
               Финмодель запускает normal и peak day симуляции. Если очереди нет, спрос на платное
               ускорение честно падает до нуля.
@@ -274,7 +349,7 @@ function App() {
       <section className="section productSection">
         <div className="sectionIntro">
           <div className="sectionMeta">
-            <span className="sectionLabel">05 / Продукт</span>
+            <span className="sectionLabel">06 / Продукт</span>
             <p>Пилотный слой поверх текущей инфраструктуры: сначала аналитика и дашборд, потом интеграция.</p>
           </div>
           <h2>Что именно получает парк.</h2>
@@ -289,7 +364,7 @@ function App() {
 
       <section className="section pilotSection" id="pilot">
         <div className="pilotCopy">
-          <span className="sectionLabel">06 / Пилот</span>
+          <span className="sectionLabel">07 / Пилот</span>
           <h2>Легкий пилот без замены билетной системы.</h2>
           <p>
             Мы приходим не с готовой истиной про парк, а с проверяемой гипотезой, benchmark аналогом
@@ -350,6 +425,22 @@ function EvidenceStat({ value, label }: { value: string; label: string }) {
       <strong>{value}</strong>
       <span>{label}</span>
     </div>
+  );
+}
+
+function BenchmarkColumn({ title, note, total, queue, negative }: { title: string; note: string; total: string; queue: string; negative: string }) {
+  return (
+    <article className="benchmarkColumn">
+      <div>
+        <span>{note}</span>
+        <h3>{title}</h3>
+      </div>
+      <dl>
+        <div><dt>Отзывы</dt><dd>{total}</dd></div>
+        <div><dt>Про очереди</dt><dd>{queue}</dd></div>
+        <div><dt>Негатив среди queue-related</dt><dd>{negative}</dd></div>
+      </dl>
+    </article>
   );
 }
 
