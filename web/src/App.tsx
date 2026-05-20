@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import {
+  AlertTriangle,
   ArrowRight,
   BarChart3,
   CircleDollarSign,
@@ -141,7 +142,7 @@ function App() {
               <Landmark size={16} />
               Кейс: Остров Мечты, Москва
             </div>
-            <h1>Очереди стоят парку денег.</h1>
+            <h1>Операционный слой для очередей, слотов и гостевых потоков.</h1>
             <p>
               Исследовательский MVP для «Острова Мечты»: отзывы, внешний ориентир по индустрии,
               симуляция очередей и сценарная экономика быстрых слотов.
@@ -158,11 +159,12 @@ function App() {
           <div className="commandSurface" aria-label="Превью дашборда оператора">
             <div className="surfaceHeader">
               <div>
-                <span>Пиковый день</span>
-                <strong>Прогноз нагрузки очередей</strong>
+                <span>Control room / Peak window</span>
+                <strong>Map-first guest flow</strong>
               </div>
-              <div className="liveBadge">Модель</div>
+              <EvidenceBadge label="Модель" />
             </div>
+            <ParkFlowMap />
             <div className="surfaceMetrics">
               <Metric icon={<Clock3 size={17} />} label="Ожидание" value={`${simulation.optimizedWait} мин`} />
               <Metric icon={<Users size={17} />} label="Быстрые слоты" value={simulation.paidSlots.toString()} />
@@ -176,11 +178,11 @@ function App() {
           </div>
         </div>
         <div className="heroStrip">
-          <span>Виртуальная очередь</span>
-          <span>Прогноз ожидания</span>
-          <span>Маршруты гостей</span>
-          <span>Платные быстрые слоты</span>
-          <span>Дашборд оператора</span>
+          <span><b>VQ</b> Виртуальная очередь</span>
+          <span><b>ETA</b> Прогноз ожидания</span>
+          <span><b>Route</b> Маршруты гостей</span>
+          <span><b>Slots</b> Инвентарь быстрых слотов</span>
+          <span><b>Ops</b> Дашборд оператора</span>
         </div>
       </section>
 
@@ -198,7 +200,7 @@ function App() {
         <div className="sourceGrid">
           {dataSources.map((source) => (
             <article className="sourceCard" key={source.title}>
-              <span>{source.title}</span>
+              <EvidenceBadge label={source.title} />
               <strong>{source.value}</strong>
               <p>{source.text}</p>
             </article>
@@ -273,6 +275,7 @@ function App() {
           <CheckItem icon={<Route size={18} />} text="Маршруты и слоты вместо хаотичного ожидания" />
           <CheckItem icon={<Gauge size={18} />} text="Оператор видит узкие места до пика" />
           <CheckItem icon={<CircleDollarSign size={18} />} text="Инвентарь быстрых слотов становится управляемой выручкой" />
+          <CheckItem icon={<AlertTriangle size={18} />} text="Риск-контроли видны рядом с коммерческим инвентарем" />
         </div>
       </section>
 
@@ -401,6 +404,41 @@ function Metric({ icon, label, value }: { icon: React.ReactNode; label: string; 
       {icon}
       <span>{label}</span>
       <strong>{value}</strong>
+    </div>
+  );
+}
+
+function EvidenceBadge({ label }: { label: string }) {
+  return <span className="evidenceBadge">{label}</span>;
+}
+
+function ParkFlowMap() {
+  const nodes = [
+    { className: "mapNode high", label: "A1", style: { left: "18%", top: "22%" } },
+    { className: "mapNode medium", label: "B4", style: { left: "63%", top: "18%" } },
+    { className: "mapNode low", label: "C2", style: { left: "73%", top: "66%" } },
+    { className: "mapNode high", label: "D7", style: { left: "29%", top: "70%" } },
+  ];
+
+  return (
+    <div className="parkFlowMap" aria-hidden="true">
+      <div className="mapGrid" />
+      <div className="mapLoop loopOne" />
+      <div className="mapLoop loopTwo" />
+      <div className="routeLine routePrimary" />
+      <div className="routeLine routeSecondary" />
+      {nodes.map((node) => (
+        <span className={node.className} style={node.style} key={node.label}>
+          {node.label}
+        </span>
+      ))}
+      <div className="slotTray">
+        <span>VQ slot inventory</span>
+        <i />
+        <i />
+        <i className="limited" />
+        <i className="closed" />
+      </div>
     </div>
   );
 }
