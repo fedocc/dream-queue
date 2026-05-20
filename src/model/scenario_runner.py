@@ -21,6 +21,29 @@ def round_money(value: float) -> float:
     return round(value, 2)
 
 
+def secondary_spend_uplift(annual_visitors: int, product: dict, effect: dict, weighted_wait_reduction: float) -> tuple[float, float]:
+    """Estimate food/retail upside from physical wait time converted into park time.
+
+    This is a scenario assumption, not observed POS data. The model only activates it
+    when the queue simulation shows positive wait reduction.
+    """
+    if weighted_wait_reduction <= 0:
+        return 0.0, 0.0
+
+    virtual_queue_guests = annual_visitors * float(product["virtual_queue_adoption"])
+    freed_wait_hours = (
+        virtual_queue_guests
+        * float(effect["freed_physical_wait_minutes_per_virtual_queue_guest"])
+        / 60
+    )
+    uplift = (
+        freed_wait_hours
+        * float(effect["spend_per_freed_wait_hour_rub"])
+        * float(effect["freed_wait_spend_capture_rate"])
+    )
+    return freed_wait_hours, uplift
+
+
 def scenario_row(config: dict, scenario_name: str) -> dict[str, float | str]:
     park = config["park"]
     product = {**config["product"], **config["scenarios"][scenario_name]}
@@ -62,14 +85,11 @@ def scenario_row(config: dict, scenario_name: str) -> dict[str, float | str]:
         + additional_attractions_normal * normal_visitors * int(park["normal_days_per_year"])
     )
 
-    # Retail uplift is deliberately conservative: only virtual-queue adopters get the
-    # extra-spend assumption, and only when the simulated wait reduction is positive.
-    retail_uplift_visitors = annual_visitors * float(product["virtual_queue_adoption"])
-    retail_uplift = (
-        retail_uplift_visitors
-        * float(effect["extra_food_retail_spend_per_guest_rub"])
-        if weighted_wait_reduction > 0
-        else 0.0
+    freed_wait_hours, retail_uplift = secondary_spend_uplift(
+        annual_visitors=annual_visitors,
+        product=product,
+        effect=effect,
+        weighted_wait_reduction=weighted_wait_reduction,
     )
 
     return {
@@ -85,6 +105,7 @@ def scenario_row(config: dict, scenario_name: str) -> dict[str, float | str]:
         "annual_fast_slot_revenue": round_money(annual_fast_slot_revenue),
         "startup_annual_revenue": round_money(annual_fast_slot_revenue * float(product["startup_revenue_share"])),
         "park_fast_slot_revenue_share": round_money(annual_fast_slot_revenue * float(product["park_revenue_share"])),
+        "freed_physical_wait_hours": round(freed_wait_hours, 0),
         "park_retail_uplift": round_money(retail_uplift),
         "park_annual_uplift": round_money(
             annual_fast_slot_revenue * float(product["park_revenue_share"]) + retail_uplift

@@ -16,6 +16,9 @@ product:
 
 effect:
   extra_food_retail_spend_per_guest_rub: 80
+  freed_physical_wait_minutes_per_virtual_queue_guest: 30
+  spend_per_freed_wait_hour_rub: 250
+  freed_wait_spend_capture_rate: 0.35
 
 simulation:
   visitors: 10000

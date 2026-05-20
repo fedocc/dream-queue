@@ -50,7 +50,7 @@ const scenarios = [
     conversion: "2%",
     slots: 189,
     revenue: "5.1 млн ₽",
-    parkUplift: "30.3 млн ₽",
+    parkUplift: "18.5 млн ₽",
   },
   {
     name: "Base",
@@ -59,7 +59,7 @@ const scenarios = [
     conversion: "5%",
     slots: 469,
     revenue: "21.1 млн ₽",
-    parkUplift: "63.3 млн ₽",
+    parkUplift: "42.7 млн ₽",
   },
   {
     name: "Aggressive",
@@ -68,7 +68,7 @@ const scenarios = [
     conversion: "10%",
     slots: 840,
     revenue: "52.9 млн ₽",
-    parkUplift: "109.8 млн ₽",
+    parkUplift: "80.4 млн ₽",
   },
 ];
 
@@ -359,7 +359,7 @@ function App() {
           <ProductTile icon={<Database size={20} />} title="Карта узких мест" text="Аттракционы и временные окна, где ожидание сильнее всего снижает ощущаемую ценность визита." />
           <ProductTile icon={<Route size={20} />} title="Маршрутизация гостей" text="Рекомендации маршрута и бесплатные виртуальные слоты, чтобы гость не стоял физически весь визит." />
           <ProductTile icon={<Gauge size={20} />} title="Дашборд оператора" text="Прогноз загрузки, перекос очередей, инвентарь слотов и действия для операционной команды." />
-          <ProductTile icon={<TrendingUp size={20} />} title="Модель выручки" text="Ограниченные платные быстрые слоты с защитой пропускной способности и прозрачным разделением выручки." />
+          <ProductTile icon={<TrendingUp size={20} />} title="Модель выручки" text="Основной эффект считается через высвобожденное время гостей для кафе, магазинов и других зон парка." />
         </div>
       </section>
 

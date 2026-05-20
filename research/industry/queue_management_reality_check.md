@@ -104,7 +104,7 @@ Queue-Times публикует API по ожиданиям в парках: жи
 - peak-day fast-slot revenue: 234 500 ₽;
 - annual fast-slot revenue: 21.1 млн ₽;
 - startup annual revenue при revenue share: 3.17 млн ₽;
-- park annual uplift: 63.3 млн ₽.
+- park annual uplift: 42.7 млн ₽, из них 24.8 млн ₽ - сценарный эффект от кафе/retail.
 
 Это не доказанный прогноз. Это демонстрация механики: если парк может управлять слотами и спросом, то деньги появляются из трех мест:
 
@@ -144,7 +144,7 @@ Queue-Times публикует API по ожиданиям в парках: жи
 1. `https://dream-queue.vercel.app`
 2. Метрики отзывов: 328 отзывов, 29.3% queue-related.
 3. Симуляция: среднее ожидание 82.0 -> 74.18 минут в base scenario.
-4. Финмодель: base annual park uplift 63.3 млн ₽, как scenario.
+4. Финмодель: base annual park uplift 42.7 млн ₽, как scenario.
 5. Reality check: Disney, Universal, accesso, Alibaba/Genting подтверждают категорию.
 6. Честный caveat: без данных парка это пока research MVP, не production forecast.
 
