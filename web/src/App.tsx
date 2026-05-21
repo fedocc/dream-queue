@@ -1,591 +1,330 @@
 import { createRoot } from "react-dom/client";
-import {
-  AlertTriangle,
-  ArrowRight,
-  BadgeCheck,
-  BarChart3,
-  Blocks,
-  CircleDollarSign,
-  Clock3,
-  Database,
-  Gauge,
-  Landmark,
-  MapPinned,
-  QrCode,
-  Route,
-  ShieldCheck,
-  Ticket,
-  Users,
-} from "lucide-react";
 import "./styles.css";
 
-const simulation = {
-  baselineWait: 82.0,
-  optimizedWait: 72.3,
-  stressWait: 162.99,
-  baselineMaxQueue: 1549.5,
-  optimizedMaxQueue: 967.25,
-  stressMaxQueue: 1685.75,
-  baselineVariance: 102106.98,
-  optimizedVariance: 5432.35,
-  paidSlots: 290,
-  peakRevenue: 145000,
-  riskOutputs: {
-    noShows: 16,
-    lateArrivals: 19,
-    abandonedSlots: 7,
-    downtimeSteps: 7,
-    kioskBookings: 31,
-    routingStrength: "0.3375",
+const evidenceRows = [
+  {
+    signal: "Genting / Alibaba",
+    supports:
+      "Category evidence for virtual queue slots, itinerary planning, incentives, crowd prediction, ticket-linked QR validation, group reservations, kiosks, availability limits, and late-window rules.",
+    doesNotProve:
+      "Dream Queue economics, revenue uplift, wait-time reduction, model accuracy, no-show rate, compliance, or implementation cost.",
   },
-};
-
-const assumptions = [
-  ["no_show_rate", "5%"],
-  ["late_arrival_rate", "8%"],
-  ["route_compliance_rate", "75%"],
-  ["ride_downtime_probability", "1%"],
-  ["paid_capacity_cap", "10%"],
-  ["kiosk_share", "12%"],
+  {
+    signal: "China smart tourism",
+    supports:
+      "Hybrid and flexible reservation patterns: offline fallback, reduced PII burden, anti-scalper controls, and visitor-flow tooling.",
+    doesNotProve:
+      "Moscow demand, Dream Island operating pain, or the commercial result of this pilot.",
+  },
+  {
+    signal: "Vendor category",
+    supports:
+      "Virtual queue, operator tooling, QR/ticket validation, group handling, no-show tracking, and terminal fallback are mature category patterns.",
+    doesNotProve:
+      "Our product-market fit or any vendor KPI unless independently audited.",
+  },
+  {
+    signal: "Disney operating rules",
+    supports:
+      "Slot scarcity, return windows, group/ticket logic, operating exceptions, and no immediate-access guarantee.",
+    doesNotProve:
+      "Queue elimination, Dream Queue revenue, or guest compliance in a different park.",
+  },
+  {
+    signal: "Dream Island scope",
+    supports:
+      "A focused pilot conversation around selected bottlenecks, existing priority-access patterns, and baseline measurement.",
+    doesNotProve:
+      "Confirmed internal queue pain, exact wait times, throughput, no-shows, paid conversion, or standby impact.",
+  },
 ];
 
-const provenanceLabels = [
-  ["Source", "Public source or repo research artifact."],
-  ["Assumption", "Model or pilot input before park data exists."],
-  ["Model output", "Local simulation or financial model result."],
-  ["Pilot hypothesis", "Claim to test in a 4-8 week pilot."],
-];
-
-const evidenceBlocks = [
+const problemPoints = [
   {
-    label: "Source",
-    title: "Genting / Alibaba",
-    know: "Public materials describe VQ, itinerary planning, incentive recommendations, crowd analysis, ticket-linked QR validation, group booking, kiosks, availability limits, and late-window rules.",
-    limit: "They do not disclose revenue uplift, wait-time reduction, model accuracy, no-show rate, recommendation compliance, or implementation cost.",
+    title: "Capacity stays physical.",
+    text: "The software does not create ride seats or dispatches. It controls how scarce access windows are offered and enforced.",
   },
   {
-    label: "Source",
-    title: "China smart tourism",
-    know: "High-crowd leisure markets use reservations, real-time visitor-flow tools, offline counters, simplified procedures, reduced PII burden, and anti-scalper controls.",
-    limit: "This does not prove Moscow demand or Dream Island economics. It informs access design and risk controls.",
+    title: "Demand becomes visible.",
+    text: "Timing, routing, slot inventory, late arrivals, no-shows, and downtime become operating signals instead of scattered symptoms.",
   },
   {
-    label: "Source",
-    title: "Comparable vendors",
-    know: "accesso, Attractions.io, Lineberty, and Disney show virtual queue, validation, group logic, dashboards, and operating rules are mature category patterns.",
-    limit: "Vendor KPI claims are treated as vendor claims unless independently audited.",
-  },
-  {
-    label: "Pilot hypothesis",
-    title: "Dream Island scope",
-    know: "Public facts support many attractions/shows and existing express/VIP priority products, which makes a focused priority-inventory discussion credible.",
-    limit: "Real wait times, throughput, no-shows, paid conversion, and standby impact require baseline measurement.",
+    title: "The pilot tests value.",
+    text: "Baseline observations come first, then the park can compare whether managed flow improves predictability without fairness tradeoffs.",
   },
 ];
 
 const workflow = [
+  ["01", "Ticket/group", "Bind a slot to a valid ticket or linked group."],
+  ["02", "VQ slot", "Offer limited return windows where capacity rules allow it."],
+  ["03", "Free waiting time", "Move part of the wait from a physical line into a managed window."],
+  ["04", "Route/incentive", "Suggest a cafe, retail, show, or lower-pressure zone while guests wait."],
+  ["05", "QR validation", "Validate ticket, group, return window, and exception at the entrance."],
+  ["06", "Operator view", "Track slot use, pressure, downtime, overrides, and standby protection."],
+];
+
+const modelRows = [
+  ["Baseline", "82 min", "1,550", "Reference scenario before managed VQ flow."],
+  ["Base VQ", "72 min", "967", "Benefit can appear under configured assumptions."],
+  ["Risk stress", "163 min", "1,686", "Bad assumptions can break the benefit; stress remains visible."],
+];
+
+const assumptions = ["no-show 5%", "late arrivals 8%", "route compliance 75%", "paid cap 10%", "kiosk share 12%"];
+
+const riskGroups = [
   {
-    icon: <Ticket size={20} />,
-    title: "Ticket / group",
-    text: "Bind a slot to a valid ticket or linked group entitlement.",
+    title: "Access control",
+    items: ["ticket-linked QR", "group validation", "non-transferable slots"],
   },
   {
-    icon: <Clock3 size={20} />,
-    title: "VQ slot",
-    text: "Offer limited return windows only where capacity and fairness rules allow it.",
+    title: "Operational exceptions",
+    items: ["no-shows", "late arrivals", "downtime", "staff override"],
   },
   {
-    icon: <Route size={20} />,
-    title: "Freed waiting time",
-    text: "Move part of the wait from a physical line into a managed time window.",
-  },
-  {
-    icon: <MapPinned size={20} />,
-    title: "Route / incentive",
-    text: "Guide guests toward lower-pressure zones, shows, food, or retail while they wait.",
-  },
-  {
-    icon: <QrCode size={20} />,
-    title: "QR validation",
-    text: "Validate the right ticket, group, return window, and exception at the gate.",
-  },
-  {
-    icon: <Gauge size={20} />,
-    title: "Operator dashboard",
-    text: "Show slot inventory, heat, downtime, late arrivals, and staff override needs.",
+    title: "Fairness & trust",
+    items: ["paid capacity cap", "offline/kiosk fallback", "minimum PII", "standby threshold"],
   },
 ];
 
-const riskControls = [
-  ["Late arrivals", "Return window, reminders, expiry, grace period, staff override SOP.", "Source + assumption"],
-  ["No-shows", "Auto-release and conservative overbooking cap around measured utilization.", "Assumption"],
-  ["QR sharing / fraud", "Ticket binding, one-time or dynamic QR, group-size validation.", "Source + assumption"],
-  ["Scalpers / hoarding", "Non-transferable slots, account limits, rate limits, anomaly logs.", "Source + assumption"],
-  ["App exclusion", "App/web plus kiosk, staff mode, printed QR, and standby path.", "Source"],
-  ["Ride downtime", "Pause slots, reassign windows, alternatives, compensation workflow.", "Assumption"],
-  ["Fairness / standby impact", "Paid capacity cap and standby penalty threshold stay visible.", "Assumption"],
-  ["Route non-compliance", "Track compliance, test incentives, avoid assuming all guests follow.", "Assumption"],
-  ["Minimum PII", "Ticket ID hash, group size, timestamp, attraction ID; no biometrics.", "Source + assumption"],
-  ["Staff override / SOP", "Rules for expired QR, wrong group, app error, accessibility, downtime.", "Assumption"],
-];
-
-const pilotPlan = [
-  "4-8 week discovery pilot",
-  "5-8 bottleneck attractions",
-  "Peak windows first",
-  "Baseline measurement before optimization claims",
-  "Simple VQ slot inventory",
-  "Governed paid priority cap only if park wants a monetization test",
-  "QR validation and entrance SOP",
-  "Operator dashboard and before/after analysis",
+const pilotSteps = [
+  ["01", "Observe", "Baseline waits, throughput, downtime, peak windows, staff constraints."],
+  ["02", "Simulate", "Use measured inputs to test slot inventory, routing, paid cap, and risk stress."],
+  ["03", "Pilot", "Run 4-8 weeks on 5-8 bottleneck attractions with QR validation and operator view."],
+  ["04", "Decide", "Compare before/after evidence and decide whether to scale, narrow, or stop."],
 ];
 
 const dataRequest = [
-  "Hourly attendance by day type",
-  "Throughput, cycle time, seats, dispatch interval",
-  "Wait-time logs or manual observations",
-  "Downtime and temporary closure logs",
-  "Existing express/VIP demand and constraints",
-  "Aggregated F&B/retail proxy if shareable",
-  "App, kiosk, ticketing, and QR feasibility",
-  "Staff constraints at attraction entrances",
+  "hourly attendance",
+  "throughput/cycle time",
+  "wait observations",
+  "downtime",
+  "express/VIP constraints",
+  "F&B/retail proxy if shareable",
+  "app/kiosk/ticketing feasibility",
+  "staff constraints",
 ];
-
-const mapNodes = [
-  { id: "A1", label: "High wait", load: "hot", x: 17, y: 28 },
-  { id: "B4", label: "Slot open", load: "watch", x: 60, y: 18 },
-  { id: "C2", label: "Low load", load: "clear", x: 76, y: 66 },
-  { id: "D7", label: "Risk", load: "hot", x: 32, y: 72 },
-  { id: "K1", label: "Kiosk", load: "neutral", x: 47, y: 48 },
-];
-
-function formatRub(value: number) {
-  return value.toLocaleString("ru-RU");
-}
 
 function App() {
   return (
     <main>
-      <header className="topbar">
-        <a className="brand" href="#top" aria-label="Dream Queue AI">
-          <span className="brandMark">DQ</span>
-          <span>Dream Queue AI</span>
-        </a>
-        <nav className="topnav" aria-label="Primary navigation">
+      <header className="siteHeader">
+        <a className="brand" href="#top" aria-label="Dream Queue home">Dream Queue</a>
+        <nav className="primaryNav" aria-label="Primary navigation">
           <a href="#problem">Problem</a>
           <a href="#evidence">Evidence</a>
+          <a href="#how">How it works</a>
           <a href="#model">Model</a>
           <a href="#pilot">Pilot</a>
         </nav>
-        <a className="navCta" href="#data">
-          Data request
-          <ArrowRight size={16} />
-        </a>
+        <a className="headerCta" href="#data">Data request</a>
       </header>
 
       <section className="hero" id="top">
-        <div className="heroGrid">
-          <div className="heroCopy">
-            <div className="eyebrow">
-              <Landmark size={16} />
-              Research MVP / indoor theme park pilot
-            </div>
-            <h1>Manage guest time without pretending queues disappear.</h1>
-            <p>
-              Dream Queue AI is a lightweight operations layer for virtual queue slots,
-              wait prediction, guest routing, risk controls, and limited governed priority
-              inventory. For Dream Island, it is a focused pilot proposal, not a proven
-              production product.
-            </p>
-            <div className="heroProof">
-              <EvidenceBadge label="Pilot hypothesis" />
-              <span>4-8 weeks, 5-8 bottleneck attractions, peak windows, baseline first.</span>
-            </div>
-            <div className="heroActions">
-              <a className="primaryButton" href="#pilot">
-                Review pilot scope
-                <ArrowRight size={17} />
-              </a>
-              <a className="secondaryButton" href="#evidence">Open evidence map</a>
-            </div>
-          </div>
-
-          <div className="commandSurface" aria-label="Operator control room visual">
-            <div className="surfaceHeader">
-              <div>
-                <span>Control room / peak window</span>
-                <strong>Map-first guest flow</strong>
-              </div>
-              <EvidenceBadge label="Model output" />
-            </div>
-            <IndoorParkMap />
-            <div className="alertRail">
-              <OperatorAlert tone="risk" title="Standby protection" text="Paid cap holds at 10%; stress scenario can break benefits." />
-              <OperatorAlert tone="open" title="Hybrid access" text="31 kiosk bookings in base model output; app-only is avoided." />
-            </div>
-            <div className="surfaceMetrics">
-              <Metric icon={<Clock3 size={17} />} label="Avg wait scenario" value={`${simulation.optimizedWait} min`} />
-              <Metric icon={<Users size={17} />} label="Fast slots sold" value={simulation.paidSlots.toString()} />
-              <Metric icon={<CircleDollarSign size={17} />} label="Peak slot revenue" value={`${formatRub(simulation.peakRevenue)} RUB`} />
-            </div>
+        <div className="heroCopy">
+          <p className="metadata">Research MVP · 4-8 week pilot · 5-8 bottleneck attractions · baseline first</p>
+          <h1>Turn wait time into a managed flow.</h1>
+          <p className="lede">
+            Dream Queue is a pilot layer for virtual queue slots, guest routing, and operational risk
+            controls in indoor theme parks.
+          </p>
+          <div className="heroActions" aria-label="Hero actions">
+            <a className="button primary" href="#pilot">Review pilot scope</a>
+            <a className="button secondary" href="#evidence">Open evidence map</a>
           </div>
         </div>
-        <div className="heroStrip">
-          <span><b>VQ</b> controlled return windows</span>
-          <span><b>ETA</b> scenario wait prediction</span>
-          <span><b>Route</b> guest flow nudges</span>
-          <span><b>Slots</b> governed priority inventory</span>
-          <span><b>Risk</b> provenance and SOP</span>
+        <FlowMap />
+      </section>
+
+      <section className="section" id="problem">
+        <SectionHeader eyebrow="Problem" title="Physical capacity is fixed. The lever is flow." />
+        <div className="editorialColumns">
+          {problemPoints.map((point) => (
+            <article className="textPoint" key={point.title}>
+              <h3>{point.title}</h3>
+              <p>{point.text}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      <section className="section problemSection" id="problem">
-        <SectionIntro
-          kicker="01 / Problem"
-          eyebrow="Queues are unmanaged guest time"
-          title="Physical capacity is fixed. The operating lever is timing, routing, visibility, and slot governance."
-        />
-        <div className="problemGrid">
-          <ProblemCard icon={<Blocks size={22} />} title="Capacity is not created by software" text="Dream Queue does not increase ride seats, dispatches, or physical throughput. It makes scarce access windows explicit and controllable." />
-          <ProblemCard icon={<Clock3 size={22} />} title="Waiting time can be organized" text="A guest can stand in a line, hold a return window, follow a route, or receive a fallback. The pilot measures which pattern works." />
-          <ProblemCard icon={<ShieldCheck size={22} />} title="Fairness is an operating constraint" text="Paid priority inventory needs caps, standby thresholds, exception handling, and public language that avoids false promises." />
+      <section className="section" id="evidence">
+        <SectionHeader eyebrow="Evidence" title="Category signals are useful only when their limits stay visible." />
+        <div className="provenanceNote">
+          <span>Source</span>
+          <span>Assumption</span>
+          <span>Model output</span>
+          <span>Pilot hypothesis</span>
+        </div>
+        <div className="ledger" role="table" aria-label="Evidence ledger">
+          <div className="ledgerHead" role="row">
+            <span role="columnheader">Signal</span>
+            <span role="columnheader">What it supports</span>
+            <span role="columnheader">What it does not prove</span>
+          </div>
+          {evidenceRows.map((row) => (
+            <div className="ledgerRow" role="row" key={row.signal}>
+              <strong role="cell">{row.signal}</strong>
+              <p role="cell">{row.supports}</p>
+              <p role="cell">{row.doesNotProve}</p>
+            </div>
+          ))}
         </div>
       </section>
 
-      <section className="section evidenceSection" id="evidence">
-        <SectionIntro
-          kicker="02 / Evidence map"
-          eyebrow="Category evidence, not economics proof"
-          title="The pitch separates public evidence, assumptions, model outputs, and pilot hypotheses."
-        />
-        <div className="provenanceLegend" aria-label="Provenance labels">
-          {provenanceLabels.map(([label, text]) => (
-            <div key={label}>
-              <span className="provenanceChip">{label}</span>
+      <section className="section" id="how">
+        <SectionHeader eyebrow="How it works" title="A small operating loop, not a full enterprise platform." />
+        <ol className="stepFlow">
+          {workflow.map(([number, title, text]) => (
+            <li key={number}>
+              <span>{number}</span>
+              <h3>{title}</h3>
               <p>{text}</p>
-            </div>
+            </li>
           ))}
-        </div>
-        <div className="evidenceMapGrid">
-          {evidenceBlocks.map((item) => (
-            <article className="evidenceMapCard" key={item.title}>
-              <EvidenceBadge label={item.label} />
-              <h3>{item.title}</h3>
-              <dl>
-                <div><dt>What it supports</dt><dd>{item.know}</dd></div>
-                <div><dt>What it does not prove</dt><dd>{item.limit}</dd></div>
-              </dl>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section workSection" id="works">
-        <SectionIntro
-          kicker="03 / How it works"
-          eyebrow="A controlled queue operating loop"
-          title="Dream Queue turns access into slot inventory, route guidance, validation, and operator action."
-        />
-        <div className="workflowGrid">
-          {workflow.map((step, index) => (
-            <article className="workflowStep" key={step.title}>
-              <div className="stepIndex">{String(index + 1).padStart(2, "0")}</div>
-              <div className="stepIcon">{step.icon}</div>
-              <h3>{step.title}</h3>
-              <p>{step.text}</p>
-            </article>
-          ))}
-        </div>
+        </ol>
       </section>
 
       <section className="section modelSection" id="model">
-        <SectionIntro
-          kicker="04 / Simulation"
-          eyebrow="Risk-aware scenario output"
-          title="The model shows how benefits can appear under base assumptions and break under bad operating assumptions."
-        />
-        <div className="modelNotice">
-          <AlertTriangle size={18} />
-          <p>
-            <span className="provenanceChip inline">Model output</span>
-            These are local simulation outputs from configured assumptions, not measured Dream
-            Island performance. Stress output is intentionally visible because VQ/routing is fragile
-            when downtime, no-shows, late arrivals, and compliance assumptions go bad.
-          </p>
-        </div>
-        <div className="simulationGrid">
-          <KpiCard label="Average wait" before={`${simulation.baselineWait} min`} after={`${simulation.optimizedWait} min`} stress={`${simulation.stressWait} min`} />
-          <KpiCard label="Max queue length" before={simulation.baselineMaxQueue.toString()} after={simulation.optimizedMaxQueue.toString()} stress={simulation.stressMaxQueue.toString()} />
-          <KpiCard label="Queue variance" before={simulation.baselineVariance.toLocaleString("ru-RU")} after={simulation.optimizedVariance.toLocaleString("ru-RU")} stress="7,933.63" />
-        </div>
-        <div className="chartsGrid">
-          <WaitModelChart />
-          <RiskOutputPanel />
-        </div>
-        <div className="assumptionGrid">
-          {assumptions.map(([name, value]) => (
-            <div className="assumptionPill" key={name}>
-              <span>{name}</span>
-              <strong>{value}</strong>
-              <em>Assumption</em>
+        <SectionHeader eyebrow="Model" title="The base scenario improves. The stress scenario is the warning." />
+        <p className="modelWarning">
+          <span>Model output</span>
+          These values are local simulation outputs under configured assumptions, not measured Dream
+          Island performance.
+        </p>
+        <div className="comparisonTable" role="table" aria-label="Simulation comparison">
+          <div className="comparisonHead" role="row">
+            <span role="columnheader">Scenario</span>
+            <span role="columnheader">Avg wait</span>
+            <span role="columnheader">Max queue</span>
+            <span role="columnheader">Meaning</span>
+          </div>
+          {modelRows.map(([scenario, wait, queue, meaning]) => (
+            <div className="comparisonRow" role="row" key={scenario}>
+              <strong role="cell">{scenario}</strong>
+              <span role="cell" className="metricValue">{wait}</span>
+              <span role="cell" className="metricValue">{queue}</span>
+              <p role="cell">{meaning}</p>
             </div>
           ))}
         </div>
+        <p className="assumptionLine">
+          <span>Assumptions</span>
+          {assumptions.join(" · ")}
+        </p>
       </section>
 
-      <section className="section riskSection" id="risk">
-        <SectionIntro
-          kicker="05 / Risk controls"
-          eyebrow="Risk realism stays visible"
-          title="Virtual queue is controlled scarcity plus staff enforcement, not a magic queue-removal layer."
-        />
-        <div className="riskGrid">
-          {riskControls.map(([risk, control, label]) => (
-            <article className="riskCard" key={risk}>
-              <div>
-                <AlertTriangle size={17} />
-                <EvidenceBadge label={label} />
-              </div>
-              <h3>{risk}</h3>
-              <p>{control}</p>
+      <section className="section" id="risk">
+        <SectionHeader eyebrow="Risk controls" title="Virtual queue is controlled scarcity plus staff enforcement." />
+        <div className="riskBands">
+          {riskGroups.map((group) => (
+            <article key={group.title}>
+              <h3>{group.title}</h3>
+              <ul>
+                {group.items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
             </article>
           ))}
         </div>
       </section>
 
       <section className="section pilotSection" id="pilot">
-        <div className="pilotCopy">
-          <span className="sectionLabel">06 / Pilot proposal</span>
-          <h2>Start with a narrow discovery pilot, not a platform replacement.</h2>
-          <p>
-            The next credible step is a measured pilot around bottleneck attractions and peak
-            windows. Baseline observations come before claims; paid priority is optional and capped
-            only if the park wants to test monetization.
-          </p>
-          <div className="pilotBadges">
-            <EvidenceBadge label="Pilot hypothesis" />
-            <EvidenceBadge label="Assumption-led setup" />
-          </div>
-        </div>
-        <div className="pilotChecklist">
-          {pilotPlan.map((step) => (
-            <div key={step}>
-              <ShieldCheck size={18} />
-              <span>{step}</span>
-            </div>
+        <SectionHeader eyebrow="Pilot" title="A narrow discovery pilot keeps the claim honest." />
+        <div className="timeline">
+          {pilotSteps.map(([number, title, text]) => (
+            <article key={number}>
+              <span>{number}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
           ))}
         </div>
+        <p className="pilotMeta">
+          4-8 weeks · 5-8 bottleneck attractions · peak windows · baseline first · QR validation ·
+          operator dashboard · before/after analysis
+        </p>
       </section>
 
       <section className="section dataSection" id="data">
-        <SectionIntro
-          kicker="07 / Data request"
-          eyebrow="Discovery with real park data"
-          title="The CTA is not to buy a product. It is to run a controlled discovery/pilot with measured inputs."
-        />
-        <div className="dataLayout">
-          <div className="dataRequestGrid">
-            {dataRequest.map((item) => (
-              <div className="dataRequestItem" key={item}>
-                <Database size={16} />
-                <span>{item}</span>
-              </div>
-            ))}
-          </div>
-          <aside className="ctaPanel">
-            <EvidenceBadge label="Next step" />
-            <h3>Run discovery with real park data.</h3>
-            <p>
-              Validate demand shape, throughput, wait observations, downtime, current priority
-              constraints, and staff SOP before making optimization or commercial claims.
-            </p>
-            <a className="primaryButton" href="mailto:hello@dreamqueue.ai?subject=Dream%20Queue%20AI%20discovery%20pilot">
-              Request pilot data checklist
-              <ArrowRight size={17} />
-            </a>
-          </aside>
+        <div>
+          <SectionHeader eyebrow="Data request" title="Run discovery with real park data." />
+          <p className="dataIntro">
+            The next step is practical: collect the minimum inputs needed to measure the baseline,
+            simulate risk, and decide whether a pilot is worth running.
+          </p>
         </div>
+        <ul className="dataList">
+          {dataRequest.map((item) => <li key={item}>{item}</li>)}
+        </ul>
+        <a className="button primary finalCta" href="mailto:hello@dreamqueue.ai?subject=Dream%20Queue%20pilot%20data%20request">
+          Run discovery with real park data
+        </a>
       </section>
 
       <footer className="footer">
-        <span>Dream Queue AI</span>
-        <span>Research MVP and pilot proposal. Scenario outputs are not measured Dream Island data.</span>
+        <span>Dream Queue</span>
+        <span>Research MVP and pilot proposal. Scenario outputs are not measured park performance.</span>
       </footer>
     </main>
   );
 }
 
-function IndoorParkMap() {
+function SectionHeader({ eyebrow, title }: { eyebrow: string; title: string }) {
   return (
-    <div className="parkFlowMap" aria-hidden="true">
-      <svg viewBox="0 0 620 340" role="img" aria-label="Abstract indoor park map with routes and queue heat">
-        <defs>
-          <linearGradient id="routeGradient" x1="0" x2="1">
-            <stop offset="0%" stopColor="#51b9c3" stopOpacity="0.15" />
-            <stop offset="52%" stopColor="#51b9c3" />
-            <stop offset="100%" stopColor="#88d8b0" />
-          </linearGradient>
-          <filter id="routeGlow">
-            <feGaussianBlur stdDeviation="5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-        <path className="mapHall" d="M68 80 C142 28 275 34 365 68 C485 113 531 210 474 275 C417 339 253 317 155 268 C63 222 17 130 68 80Z" />
-        <path className="mapHall inner" d="M173 111 C231 78 345 86 405 129 C463 171 460 240 399 268 C337 296 219 270 171 224 C127 181 124 139 173 111Z" />
-        <path className="mapRoute primary" d="M106 95 C167 147 228 181 293 177 C367 174 424 145 504 199" />
-        <path className="mapRoute secondary" d="M198 257 C247 206 311 164 391 124" />
-        <path className="mapRoute warning" d="M111 225 C181 214 234 226 300 270" />
-      </svg>
-      {mapNodes.map((node) => (
-        <div
-          className={`mapNode ${node.load}`}
-          style={{ left: `${node.x}%`, top: `${node.y}%` }}
-          key={node.id}
-        >
-          <strong>{node.id}</strong>
-          <span>{node.label}</span>
-        </div>
-      ))}
-      <div className="slotTray">
-        <span>VQ slot inventory</span>
-        <i />
-        <i />
-        <i className="limited" />
-        <i className="closed" />
-      </div>
-      <div className="mapLegend">
-        <span><i className="hot" /> queue heat</span>
-        <span><i className="clear" /> route target</span>
-        <span><i className="watch" /> limited slots</span>
-      </div>
-    </div>
-  );
-}
-
-function SectionIntro({ kicker, eyebrow, title }: { kicker: string; eyebrow: string; title: string }) {
-  return (
-    <div className="sectionIntro">
-      <div className="sectionMeta">
-        <span className="sectionLabel">{kicker}</span>
-        <p>{eyebrow}</p>
-      </div>
+    <div className="sectionHeader">
+      <p>{eyebrow}</p>
       <h2>{title}</h2>
     </div>
   );
 }
 
-function EvidenceBadge({ label }: { label: string }) {
-  return <span className="evidenceBadge">{label}</span>;
-}
-
-function Metric({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
+function FlowMap() {
   return (
-    <div className="surfaceMetric">
-      {icon}
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </div>
-  );
-}
-
-function OperatorAlert({ tone, title, text }: { tone: "risk" | "open"; title: string; text: string }) {
-  return (
-    <div className={`operatorAlert ${tone}`}>
-      {tone === "risk" ? <AlertTriangle size={17} /> : <BadgeCheck size={17} />}
-      <div>
-        <strong>{title}</strong>
-        <span>{text}</span>
-      </div>
-    </div>
-  );
-}
-
-function ProblemCard({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
-  return (
-    <article className="problemCard">
-      <div className="cardIcon">{icon}</div>
-      <h3>{title}</h3>
-      <p>{text}</p>
-    </article>
-  );
-}
-
-function KpiCard({ label, before, after, stress }: { label: string; before: string; after: string; stress: string }) {
-  return (
-    <article className="kpiCard">
-      <div className="kpiHeader">
-        <BarChart3 size={18} />
-        <span>{label}</span>
-      </div>
-      <div className="kpiColumns">
-        <div><span>Baseline</span><strong>{before}</strong></div>
-        <div><span>Base VQ</span><strong>{after}</strong></div>
-        <div><span>Risk stress</span><strong>{stress}</strong></div>
-      </div>
-      <EvidenceBadge label="Model output" />
-    </article>
-  );
-}
-
-function WaitModelChart() {
-  const max = 170;
-  const rows = [
-    ["Baseline", simulation.baselineWait, "danger"],
-    ["Base VQ", simulation.optimizedWait, "success"],
-    ["Risk stress", simulation.stressWait, "warning"],
-  ] as const;
-
-  return (
-    <section className="dashboardCard">
-      <div className="dashboardCardHeader">
-        <h3>Average wait scenario</h3>
-        <span>minutes, configured model output</span>
-      </div>
-      <div className="barComparison">
-        {rows.map(([label, value, tone]) => (
-          <div className="chartBarRow" key={label}>
-            <div>
-              <span>{label}</span>
-              <strong>{value.toLocaleString("ru-RU")} min</strong>
-            </div>
-            <div className="chartBarTrack">
-              <i className={tone} style={{ width: `${(value / max) * 100}%` }} />
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function RiskOutputPanel() {
-  const outputs = [
-    ["Paid no-shows", simulation.riskOutputs.noShows],
-    ["Late arrivals", simulation.riskOutputs.lateArrivals],
-    ["Abandoned slots", simulation.riskOutputs.abandonedSlots],
-    ["Downtime steps", simulation.riskOutputs.downtimeSteps],
-    ["Kiosk bookings", simulation.riskOutputs.kioskBookings],
-    ["Routing strength", simulation.riskOutputs.routingStrength],
-  ];
-
-  return (
-    <section className="dashboardCard">
-      <div className="dashboardCardHeader">
-        <h3>Risk outputs in base scenario</h3>
-        <span>risk realism layer remains visible</span>
-      </div>
-      <div className="riskOutputList">
-        {outputs.map(([label, value]) => (
-          <div key={label}>
-            <span>{label}</span>
-            <strong>{value}</strong>
-          </div>
-        ))}
-      </div>
-    </section>
+    <figure className="flowMap" aria-label="Abstract indoor park flow map">
+      <svg viewBox="0 0 760 520" role="img" aria-labelledby="flowTitle flowDesc">
+        <title id="flowTitle">Indoor park flow map</title>
+        <desc id="flowDesc">
+          Entrance, bottleneck ride, open slot, cafe route, QR return window, and one risk marker.
+        </desc>
+        <path className="mapShell" d="M77 263C77 121 196 58 349 58h111c141 0 224 83 224 198 0 129-95 205-248 205H298C168 461 77 390 77 263Z" />
+        <path className="mapAtrium" d="M222 259c0-77 65-124 151-124h51c79 0 129 48 129 121 0 78-59 127-145 127h-51c-81 0-135-50-135-124Z" />
+        <path className="route mainRoute" d="M112 285C176 246 230 233 297 247c73 15 104 68 177 52 57-12 100-60 167-61" />
+        <path className="route cafeRoute" d="M316 326C379 368 473 378 560 337" />
+        <path className="route returnRoute" d="M176 195C244 141 352 122 459 149" />
+        <g className="node entrance" transform="translate(114 287)">
+          <circle r="17" />
+          <text x="27" y="-3">Entrance</text>
+          <text x="27" y="15">ticket-linked</text>
+        </g>
+        <g className="node bottleneck" transform="translate(307 249)">
+          <circle r="19" />
+          <text x="29" y="-3">Bottleneck ride</text>
+          <text x="29" y="15">standby pressure</text>
+        </g>
+        <g className="node openSlot" transform="translate(641 238)">
+          <circle r="18" />
+          <text x="-132" y="-5">Open slot</text>
+          <text x="-132" y="14">limited return window</text>
+        </g>
+        <g className="node cafe" transform="translate(565 337)">
+          <circle r="16" />
+          <text x="-154" y="-5">Suggested cafe / retail route</text>
+          <text x="-154" y="14">pilot hypothesis</text>
+        </g>
+        <g className="node qr" transform="translate(462 150)">
+          <circle r="16" />
+          <text x="26" y="-5">QR return window</text>
+          <text x="26" y="14">staff validation</text>
+        </g>
+        <g className="riskMarker" transform="translate(226 375)">
+          <path d="M0-19 18 15h-36Z" />
+          <text x="30" y="3">late arrival risk</text>
+        </g>
+      </svg>
+      <figcaption>
+        Flow map: entrance, bottleneck ride, open slot, suggested cafe/retail route, QR return
+        window, and one operational risk marker.
+      </figcaption>
+    </figure>
   );
 }
 
