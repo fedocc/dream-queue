@@ -1,10 +1,10 @@
 const zones = [
-  ["Village of Smurfs", "high"],
-  ["City of Heroes", "medium"],
-  ["Dream Race", "low"],
-  ["Lost World", "high"],
-  ["Kids Land", "low"],
-  ["Central Avenue", "medium"],
+  ["Деревня смурфиков", "high"],
+  ["Город героев", "medium"],
+  ["Гонка мечты", "low"],
+  ["Затерянный мир", "high"],
+  ["Детская зона", "low"],
+  ["Центральная аллея", "medium"],
 ];
 
 export default function ParkMapMock() {
@@ -18,4 +18,3 @@ export default function ParkMapMock() {
     </div>
   );
 }
-

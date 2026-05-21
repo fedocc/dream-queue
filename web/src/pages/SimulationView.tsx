@@ -13,17 +13,17 @@ export default function SimulationView() {
   return (
     <div>
       <div className="pageHeader">
-        <span>Pitch simulation</span>
-        <h1>До/после на основе assumptions</h1>
+        <span>Сценарная модель</span>
+        <h1>До/после на основе предпосылок</h1>
       </div>
       <div className="segmented">
         <button className={mode === "baseline" ? "selected" : ""} onClick={() => setMode("baseline")}>Без продукта</button>
         <button className={mode === "optimized" ? "selected" : ""} onClick={() => setMode("optimized")}>С продуктом</button>
       </div>
       <div className="metricGrid wide">
-        <div className="metric"><Activity size={19} /><span>Среднее ожидание scenario</span><strong>{current.wait} мин</strong></div>
-        <div className="metric"><Users size={19} /><span>Аттракционов на гостя scenario</span><strong>{current.attractions}</strong></div>
-        <div className="metric"><Coins size={19} /><span>Fast-pass model output</span><strong>{current.revenue.toLocaleString("ru-RU")} ₽</strong></div>
+        <div className="metric"><Activity size={19} /><span>Среднее ожидание, сценарий</span><strong>{current.wait} мин</strong></div>
+        <div className="metric"><Users size={19} /><span>Аттракционов на гостя, сценарий</span><strong>{current.attractions}</strong></div>
+        <div className="metric"><Coins size={19} /><span>Fast-pass, модельный расчет</span><strong>{current.revenue.toLocaleString("ru-RU")} ₽</strong></div>
       </div>
       <div className="simulationCharts">
         <div className="beforeAfter">
@@ -32,8 +32,8 @@ export default function SimulationView() {
         </div>
         <RevenueChart />
         <div className="upliftBox">
-          <strong>Model output, not measured park performance</strong>
-          <p>Scenario output under assumptions: -9.7 мин к среднему ожиданию and 145 тыс. ₽ fast-slot revenue in the base peak-day scenario. Аттракционов на гостя не растет, потому что VQ не увеличивает physical capacity; wait, visits and revenue must be validated against baseline park data before use as claims.</p>
+          <strong>Модельный расчет, не измеренные показатели парка</strong>
+          <p>Сценарный расчет по предпосылкам: -9.7 мин к среднему ожиданию и 145 тыс. ₽ выручки быстрых слотов в базовом сценарии пикового дня. Аттракционов на гостя не становится больше, потому что виртуальная очередь не увеличивает физическую емкость; ожидание, посещения и выручку нужно проверить на базовых данных парка до использования как утверждений.</p>
         </div>
       </div>
     </div>

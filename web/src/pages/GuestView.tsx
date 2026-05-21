@@ -3,10 +3,10 @@ import AttractionCard from "../components/AttractionCard";
 import ParkMapMock from "../components/ParkMapMock";
 
 const attractions = [
-  { name: "Мельница", zone: "Village of Smurfs", wait: 42, slot: "16:20", fastPrice: 490, load: "high" },
-  { name: "Кобра", zone: "City of Heroes", wait: 28, slot: "15:45", fastPrice: 590, load: "medium" },
-  { name: "Ночное Дерби", zone: "Dream Race", wait: 18, slot: "15:20", fastPrice: 390, load: "low" },
-  { name: "Река Динозавров", zone: "Lost World", wait: 36, slot: "16:05", fastPrice: 490, load: "high" },
+  { name: "Мельница", zone: "Деревня смурфиков", wait: 42, slot: "16:20", fastPrice: 490, load: "high" },
+  { name: "Кобра", zone: "Город героев", wait: 28, slot: "15:45", fastPrice: 590, load: "medium" },
+  { name: "Ночное Дерби", zone: "Гонка мечты", wait: 18, slot: "15:20", fastPrice: 390, load: "low" },
+  { name: "Река Динозавров", zone: "Затерянный мир", wait: 36, slot: "16:05", fastPrice: 490, load: "high" },
 ];
 
 export default function GuestView() {
@@ -14,14 +14,14 @@ export default function GuestView() {
     <div className="pageGrid">
       <section>
         <div className="pageHeader">
-          <span>Guest app</span>
+          <span>Гостевой интерфейс</span>
           <h1>Сценарный маршрут и управляемое окно ожидания</h1>
         </div>
         <div className="routePanel">
           <Sparkles size={20} />
           <div>
-            <strong>Рекомендация маршрута (pilot hypothesis)</strong>
-            <p>Сначала Ночное Дерби, затем Кобра через free slot 15:45. Мельницу лучше проверить как bottleneck slot на 16:20.</p>
+            <strong>Рекомендация маршрута, гипотеза пилота</strong>
+            <p>Сначала Ночное Дерби, затем Кобра через свободный слот 15:45. Мельницу лучше проверить как перегруженный слот на 16:20.</p>
           </div>
         </div>
         <div className="cardList">
@@ -33,7 +33,7 @@ export default function GuestView() {
       <aside>
         <div className="toolHeader">
           <Navigation size={19} />
-          <span>Live park load</span>
+          <span>Текущая загрузка парка</span>
         </div>
         <ParkMapMock />
       </aside>

@@ -14,13 +14,13 @@ export default function OperatorDashboard() {
     <div className="operatorGrid">
       <section>
         <div className="pageHeader">
-          <span>Operator dashboard</span>
+          <span>Панель оператора</span>
           <h1>Прогноз загрузки и управление слотами</h1>
         </div>
         <div className="metricGrid">
-          <div className="metric"><Gauge size={19} /><span>Avg wait scenario</span><strong>72.3 мин</strong></div>
-          <div className="metric"><TrendingUp size={19} /><span>Fast slots model output</span><strong>145 тыс. ₽/день</strong></div>
-          <div className="metric"><AlertTriangle size={19} /><span>Risk zones scenario</span><strong>2</strong></div>
+          <div className="metric"><Gauge size={19} /><span>Среднее ожидание, сценарий</span><strong>72.3 мин</strong></div>
+          <div className="metric"><TrendingUp size={19} /><span>Быстрые слоты, модельный расчет</span><strong>145 тыс. ₽/день</strong></div>
+          <div className="metric"><AlertTriangle size={19} /><span>Зоны риска, сценарий</span><strong>2</strong></div>
         </div>
         <div className="loadPanel">
           {load.map(([name, value]) => (
@@ -35,8 +35,8 @@ export default function OperatorDashboard() {
       </section>
       <aside className="recommendationPanel">
         <h2>Рекомендация системы</h2>
-        <p>Scenario output: Мельница перегружена, и прогноз остается чувствительным к late arrivals, no-shows и downtime.</p>
-        <p>Pilot hypothesis: ограничить paid capacity, сохранить standby threshold и перенаправить гостей только там, где route compliance подтверждается в пилоте.</p>
+        <p>Сценарный расчет: Мельница перегружена, и прогноз остается чувствительным к опозданиям, неявкам и простоям.</p>
+        <p>Гипотеза пилота: ограничить платную емкость, сохранить порог защиты обычной очереди и перенаправить гостей только там, где соблюдение маршрута подтверждается в пилоте.</p>
         <RevenueChart />
       </aside>
     </div>

@@ -10,21 +10,27 @@ type Props = {
 };
 
 export default function AttractionCard({ name, zone, wait, slot, fastPrice, load }: Props) {
+  const loadLabel = {
+    high: "высокая",
+    medium: "средняя",
+    low: "низкая",
+  }[load] ?? load;
+
   return (
     <article className="attractionCard">
       <div>
-        <span className={`loadBadge ${load}`}>{load}</span>
+        <span className={`loadBadge ${load}`}>{loadLabel}</span>
         <h2>{name}</h2>
         <p>{zone}</p>
       </div>
       <div className="waitBlock">
-        <strong>{wait} мин scenario</strong>
+        <strong>{wait} мин, сценарий</strong>
         <span>Свободный слот: {slot}</span>
-        <span>Fast slot scenario: {fastPrice} ₽</span>
+        <span>Быстрый слот, сценарий: {fastPrice} ₽</span>
       </div>
       <div className="actions">
         <button><CalendarPlus size={17} />Забронировать</button>
-        <button className="primary"><Zap size={17} />Купить fast slot</button>
+        <button className="primary"><Zap size={17} />Купить быстрый слот</button>
       </div>
     </article>
   );
