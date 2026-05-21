@@ -206,26 +206,31 @@ function App() {
         <SectionHeader eyebrow="Модель" title="Базовый сценарий улучшается. Стресс-сценарий показывает границы эффекта." />
         <p className="modelWarning">
           <span>Модельный расчет</span>
-          Это модельные расчеты, а не реальные данные «Острова Мечты».
+          Это модельные расчёты, а не реальные данные «Острова Мечты».
         </p>
-        <div className="comparisonTable" role="table" aria-label="Сравнение сценариев модели">
-          <div className="comparisonHead" role="row">
-            <span role="columnheader">Сценарий</span>
-            <span role="columnheader">Среднее ожидание</span>
-            <span role="columnheader">Максимальная очередь</span>
-            <span role="columnheader">Что это означает</span>
-          </div>
+        <div className="comparisonGrid" aria-label="Сравнение сценариев модели">
           {modelRows.map((row) => (
-            <div className={`comparisonRow ${row.tone}`} role="row" key={row.scenario}>
-              <strong role="cell">{row.scenario}</strong>
-              <span role="cell" className="metricValue">{row.wait}</span>
-              <span role="cell" className="metricValue">{row.queue}</span>
-              <p role="cell">{row.meaning}</p>
-            </div>
+            <article className={`comparisonCard ${row.tone}`} key={row.scenario}>
+              <div className="scenarioTitle">
+                <span>Сценарий</span>
+                <strong>{row.scenario}</strong>
+              </div>
+              <div className="scenarioMetrics">
+                <div>
+                  <span>Среднее ожидание</span>
+                  <strong className="metricValue">{row.wait}</strong>
+                </div>
+                <div>
+                  <span>Максимальная очередь</span>
+                  <strong className="metricValue">{row.queue}</strong>
+                </div>
+              </div>
+              <p>{row.meaning}</p>
+            </article>
           ))}
         </div>
         <p className="assumptionLine">
-          <span>Предпосылки</span>
+          <span>Предпосылки:</span>
           {assumptions.join(" · ")}
         </p>
       </section>
