@@ -186,110 +186,54 @@ main {
   background: var(--surface);
 }
 
-.flowMap {
+.heroInfographic {
   margin: 0;
   position: relative;
-  background:
-    linear-gradient(180deg, rgba(255, 253, 246, 0.92), rgba(255, 253, 246, 0.7)),
-    var(--surface);
+  padding: clamp(10px, 1.4vw, 16px);
+  background: linear-gradient(180deg, rgba(255, 253, 246, 0.98), rgba(255, 253, 246, 0.82));
   border: 1px solid var(--line);
   border-radius: 18px;
   box-shadow: var(--shadow);
   overflow: hidden;
 }
 
-.flowMap::before {
+.heroInfographic::before {
   content: "";
   position: absolute;
-  inset: 24px;
-  border: 1px solid rgba(221, 214, 200, 0.75);
-  border-radius: 14px;
+  inset: 0;
+  background: radial-gradient(circle at 35% 18%, rgba(47, 125, 104, 0.16), transparent 34%);
   pointer-events: none;
 }
 
-.flowMap svg {
+.heroInfographic img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
-  aspect-ratio: 760 / 520;
+  height: auto;
+  aspect-ratio: 1448 / 1086;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid rgba(221, 214, 200, 0.82);
 }
 
-.mapShell,
-.mapAtrium {
-  fill: none;
-  stroke: var(--line);
-  stroke-width: 2;
-}
-
-.mapAtrium {
-  stroke-dasharray: 5 8;
-}
-
-.route {
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.mainRoute {
-  stroke: var(--accent);
-  stroke-width: 7;
-}
-
-.cafeRoute {
-  stroke: #8ab7a8;
-  stroke-width: 4;
-}
-
-.returnRoute {
-  stroke: var(--risk);
-  stroke-width: 4;
-  stroke-dasharray: 9 12;
-}
-
-.node circle {
-  fill: var(--surface);
-  stroke: var(--accent);
-  stroke-width: 4;
-}
-
-.node.bottleneck circle {
-  stroke: var(--risk);
-}
-
-.node.openSlot circle,
-.node.qr circle {
-  fill: var(--accent-soft);
-}
-
-.node text,
-.riskMarker text {
-  fill: var(--ink);
-  font-size: 15px;
-  font-weight: 650;
-}
-
-.node text + text {
-  fill: var(--muted);
-  font-size: 12px;
-  font-weight: 520;
-}
-
-.riskMarker path {
-  fill: rgba(185, 130, 43, 0.14);
-  stroke: var(--risk);
-  stroke-width: 3;
-}
-
-.riskMarker text {
-  fill: var(--risk);
-}
-
-.flowMap figcaption {
+.heroInfographic figcaption {
+  position: relative;
+  z-index: 1;
   margin: 0;
-  padding: 0 28px 26px;
+  padding: 14px 6px 2px;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.45;
+}
+
+.heroInfographic::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(255, 253, 246, 0.56);
+  border-radius: 13px;
+  pointer-events: none;
 }
 
 .section {
@@ -492,8 +436,22 @@ main {
   font-variant-numeric: tabular-nums;
 }
 
-.comparisonRow:nth-child(4) .metricValue {
+.comparisonRow.positive strong,
+.comparisonRow.positive .metricValue {
+  color: var(--accent);
+}
+
+.comparisonRow.positive {
+  background: linear-gradient(90deg, rgba(220, 239, 232, 0.58), transparent 72%);
+}
+
+.comparisonRow.warning strong,
+.comparisonRow.warning .metricValue {
   color: var(--risk);
+}
+
+.comparisonRow.warning {
+  background: linear-gradient(90deg, rgba(185, 130, 43, 0.12), transparent 72%);
 }
 
 .assumptionLine {
@@ -655,7 +613,7 @@ main {
     min-height: 0;
   }
 
-  .flowMap {
+  .heroInfographic {
     max-width: 680px;
   }
 
@@ -741,25 +699,21 @@ main {
     width: 100%;
   }
 
-  .flowMap::before {
-    inset: 14px;
+  .heroInfographic {
+    padding: 8px;
   }
 
-  .flowMap svg {
-    min-height: 360px;
+  .heroInfographic::after {
+    inset: 8px;
   }
 
-  .node text,
-  .riskMarker text {
-    font-size: 17px;
+  .heroInfographic img {
+    max-height: 440px;
+    object-position: center;
   }
 
-  .node text + text {
-    font-size: 14px;
-  }
-
-  .flowMap figcaption {
-    padding: 0 18px 20px;
+  .heroInfographic figcaption {
+    padding: 12px 4px 0;
   }
 
   .section {
