@@ -63,6 +63,23 @@ const workflow = [
   ["06", "Панель оператора", "Следить за использованием слотов, нагрузкой, простоями, ручными решениями и защитой обычной очереди."],
 ];
 
+const experienceCards = [
+  {
+    label: "Как это видит гость",
+    title: "Ваш слот: 14:20-14:40",
+    metric: "До входа 28 минут",
+    text: "Рекомендуемый маршрут: кафе -> магазин -> аттракцион. Гость не стоит всё время в физической линии, но возвращается в ограниченное окно.",
+    points: ["окно возврата", "маршрут ожидания", "QR у входа"],
+  },
+  {
+    label: "Как это видит оператор",
+    title: "Загрузка аттракциона 92%",
+    metric: "Окна возврата заполнены на 73%",
+    text: "Оператор видит неявки, опоздания, ручные исключения, риск простоя и лимит платной емкости до того, как это ломает очередь.",
+    points: ["неявки 14%", "ручных исключений 6", "paid cap 10%"],
+  },
+];
+
 const modelRows = [
   {
     scenario: "Без Dream Queue",
@@ -129,8 +146,8 @@ function App() {
         <a className="brand" href="#top" aria-label="Dream Queue: на главную">Dream Queue</a>
         <nav className="primaryNav" aria-label="Основная навигация">
           <a href="#problem">Проблема</a>
-          <a href="#evidence">Основания</a>
-          <a href="#how">Как это работает</a>
+          <a className="optionalNav" href="#evidence">Основания</a>
+          <a className="optionalNav" href="#how">Как это работает</a>
           <a href="#model">Модель</a>
           <a href="#pilot">Пилот</a>
         </nav>
@@ -142,8 +159,8 @@ function App() {
           <p className="metadata">Исследовательский MVP · Пилот на 4-8 недель · 5-8 перегруженных аттракционов · Сначала базовые замеры</p>
           <h1>Управляйте временем гостей, а не только очередями.</h1>
           <p className="lede">
-            Dream Queue - это пилотное решение для виртуальных слотов, маршрутизации гостей и
-            контроля операционных рисков в крытых парках развлечений.
+            Dream Queue - это B2B-пилот для парка: гость получает виртуальное окно входа и маршрут
+            ожидания, а оператор видит загрузку, неявки, опоздания, QR-проверку и лимит priority-слотов.
           </p>
           <div className="heroActions" aria-label="Действия в первом экране">
             <a className="button primary" href="#pilot">Посмотреть рамки пилота</a>
@@ -160,6 +177,40 @@ function App() {
             <article className="textPoint" key={point.title}>
               <h3>{point.title}</h3>
               <p>{point.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section pilotSection" id="pilot">
+        <SectionHeader eyebrow="Пилот" title="Проверяем на 5-8 перегруженных аттракционах за 4-8 недель." />
+        <div className="timeline">
+          {pilotSteps.map(([number, title, text]) => (
+            <article key={number}>
+              <span>{number}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+        <p className="pilotMeta">
+          4-8 недель · 5-8 перегруженных аттракционов · пиковые окна · сначала базовые замеры ·
+          QR-проверка · панель оператора · анализ до/после
+        </p>
+      </section>
+
+      <section className="section" id="how">
+        <SectionHeader eyebrow="Как это выглядит" title="Один пилот, два интерфейса: понятный путь для гостя и контрольная панель для оператора." />
+        <div className="experienceGrid">
+          {experienceCards.map((card) => (
+            <article className="experienceCard" key={card.label}>
+              <span>{card.label}</span>
+              <h3>{card.title}</h3>
+              <strong>{card.metric}</strong>
+              <p>{card.text}</p>
+              <ul>
+                {card.points.map((point) => <li key={point}>{point}</li>)}
+              </ul>
             </article>
           ))}
         </div>
@@ -189,7 +240,7 @@ function App() {
         </div>
       </section>
 
-      <section className="section" id="how">
+      <section className="section">
         <SectionHeader eyebrow="Как это работает" title="Небольшой операционный контур, а не тяжелая корпоративная платформа." />
         <ol className="stepFlow">
           {workflow.map(([number, title, text]) => (
@@ -247,23 +298,6 @@ function App() {
             </article>
           ))}
         </div>
-      </section>
-
-      <section className="section pilotSection" id="pilot">
-        <SectionHeader eyebrow="Пилот" title="Узкий исследовательский пилот удерживает обещания в проверяемых рамках." />
-        <div className="timeline">
-          {pilotSteps.map(([number, title, text]) => (
-            <article key={number}>
-              <span>{number}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </div>
-        <p className="pilotMeta">
-          4-8 недель · 5-8 перегруженных аттракционов · пиковые окна · сначала базовые замеры ·
-          QR-проверка · панель оператора · анализ до/после
-        </p>
       </section>
 
       <section className="section dataSection" id="data">

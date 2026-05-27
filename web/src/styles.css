@@ -2,7 +2,7 @@
   --bg: #f6f3ea;
   --surface: #fffdf6;
   --ink: #101512;
-  --muted: #65706a;
+  --muted: #4f5b54;
   --line: #ddd6c8;
   --accent: #2f7d68;
   --accent-soft: #dcefe8;
@@ -128,14 +128,14 @@ main {
 .hero h1 {
   max-width: 760px;
   margin: 18px 0 22px;
-  font-size: clamp(44px, 7vw, 92px);
-  line-height: 0.96;
+  font-size: clamp(42px, 6.2vw, 82px);
+  line-height: 0.98;
   letter-spacing: 0;
   text-wrap: balance;
 }
 
 .lede {
-  max-width: 680px;
+  max-width: 740px;
   margin: 0;
   color: var(--muted);
   font-size: clamp(19px, 2vw, 24px);
@@ -253,8 +253,8 @@ main {
 .sectionHeader h2 {
   max-width: 1040px;
   margin: 0;
-  font-size: clamp(34px, 4.4vw, 60px);
-  line-height: 1.06;
+  font-size: clamp(32px, 3.8vw, 52px);
+  line-height: 1.08;
   letter-spacing: 0;
   font-weight: 690;
   text-wrap: pretty;
@@ -273,6 +273,7 @@ main {
 }
 
 .textPoint h3,
+.experienceCard h3,
 .stepFlow h3,
 .riskBands h3,
 .timeline h3 {
@@ -283,6 +284,8 @@ main {
 }
 
 .textPoint p,
+.experienceCard p,
+.experienceCard li,
 .stepFlow p,
 .riskBands li,
 .timeline p,
@@ -300,6 +303,63 @@ main {
 
 .textPoint p {
   margin-top: 14px;
+}
+
+.experienceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 34px);
+}
+
+.experienceCard {
+  min-width: 0;
+  padding: clamp(22px, 3vw, 34px);
+  background: rgba(255, 253, 246, 0.72);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 50px rgba(35, 31, 24, 0.05);
+}
+
+.experienceCard > span {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 780;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.experienceCard strong {
+  display: block;
+  margin-top: 12px;
+  color: var(--ink);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1;
+  font-weight: 740;
+}
+
+.experienceCard p {
+  margin-top: 18px;
+}
+
+.experienceCard ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.experienceCard li {
+  padding: 7px 10px;
+  background: var(--accent-soft);
+  border-radius: 999px;
+  color: #245f50;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 .provenanceNote {
@@ -659,6 +719,7 @@ main {
 
   .sectionHeader,
   .editorialColumns,
+  .experienceGrid,
   .riskBands,
   .timeline,
   .dataSection {
@@ -716,8 +777,12 @@ main {
   }
 
   .primaryNav {
-    gap: 18px;
+    gap: 16px;
     font-size: 13px;
+  }
+
+  .primaryNav .optionalNav {
+    display: none;
   }
 
   .hero,
@@ -731,7 +796,7 @@ main {
   }
 
   .hero h1 {
-    font-size: clamp(44px, 14vw, 64px);
+    font-size: clamp(40px, 12vw, 56px);
   }
 
   .button {
@@ -765,7 +830,15 @@ main {
   }
 
   .sectionHeader h2 {
-    font-size: clamp(32px, 10vw, 44px);
+    font-size: clamp(30px, 8.6vw, 38px);
+  }
+
+  .experienceCard {
+    padding: 20px;
+  }
+
+  .experienceCard strong {
+    font-size: 28px;
   }
 
   .ledger {
