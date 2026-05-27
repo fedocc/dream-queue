@@ -311,7 +311,7 @@ function App() {
         <ul className="dataList">
           {dataRequest.map((item) => <li key={item}>{item}</li>)}
         </ul>
-        <a className="button primary finalCta" href="mailto:hello@dreamqueue.ai?subject=Dream%20Queue%20pilot%20data%20request">
+        <a className="button primary finalCta" href="mailto:fnikonov983@gmail.com?subject=Dream%20Queue%20pilot%20data%20request">
           Обсудить исследовательский этап на данных парка
         </a>
       </section>
