@@ -596,27 +596,27 @@ main {
 }
 
 .pilotSection {
-  color: var(--surface);
-  background: var(--dark);
-  box-shadow: 50vw 0 0 var(--dark), -50vw 0 0 var(--dark);
-  border-top-color: rgba(255, 253, 246, 0.12);
+  color: var(--ink);
+  background: var(--surface);
+  box-shadow: 50vw 0 0 var(--surface), -50vw 0 0 var(--surface);
+  border-top-color: var(--line);
 }
 
 .pilotSection .sectionHeader p,
 .pilotSection .timeline span {
-  color: #99d5c0;
+  color: var(--accent);
 }
 
 .pilotSection .sectionHeader h2,
 .pilotSection .timeline h3 {
-  color: var(--surface);
+  color: var(--ink);
 }
 
 .timeline {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0;
-  border-top: 1px solid rgba(255, 253, 246, 0.7);
+  border-top: 1px solid var(--ink);
 }
 
 .timeline article {
@@ -626,12 +626,12 @@ main {
 
 .timeline article + article {
   padding-left: 22px;
-  border-left: 1px solid rgba(255, 253, 246, 0.16);
+  border-left: 1px solid var(--line);
 }
 
 .timeline p,
 .pilotMeta {
-  color: var(--dark-muted);
+  color: var(--muted);
 }
 
 .pilotMeta {
